@@ -1,0 +1,92 @@
+/* 顏色變數(docs/design.md 第 3 節)。淺色與深色各一組,畫面只引用變數名稱。 */
+:root {
+  color-scheme: light;
+  --bg: #f6f2fc;
+  --surface: #ffffff;
+  --surface2: #efe9fa;
+  --line: #e2daf2;
+  --text: #1a1625;
+  --muted: #625c78;
+  --lav: #cdbdf4;
+  --lavS: #b9a3ec;
+  --pink: #fad3e1;
+  --pinkS: #f4a9c5;
+  --blue: #d3eef9;
+  --blueS: #8fd0ec;
+  --own: #dccff8;
+  --peer: #ddf1fa;
+  --badge: #f29bbb;
+  --onS: #1a1625;
+  --errText: #a12b58;
+  --shadow: rgba(60, 30, 120, 0.22);
+  --scrim: rgba(12, 8, 24, 0.55);
+
+  --av0-bg: #b9a3ec; --av0-fg: #1a1625;
+  --av1-bg: #f4a9c5; --av1-fg: #1a1625;
+  --av2-bg: #8fd0ec; --av2-fg: #1a1625;
+  --av3-bg: #d7c9f8; --av3-fg: #1a1625;
+  --av4-bg: #f9cfdf; --av4-fg: #1a1625;
+  --av5-bg: #bfe5f5; --av5-fg: #1a1625;
+}
+
+/* 使用者的系統是深色,而且沒有手動選淺色 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #14111e;
+    --surface: #1d1929;
+    --surface2: #2a2440;
+    --line: #3a3354;
+    --text: #f5f2fb;
+    --muted: #b5adcb;
+    --lav: #4b3c86;
+    --lavS: #8b72db;
+    --pink: #6b3151;
+    --pinkS: #e07ba6;
+    --blue: #244e63;
+    --blueS: #58b3da;
+    --own: #54428f;
+    --peer: #25475a;
+    --onS: #14111e;
+    --errText: #f4a9c5;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --scrim: rgba(12, 8, 24, 0.7);
+
+    --av0-bg: #7b62c9; --av0-fg: #ffffff;
+    --av1-bg: #b64d7c; --av1-fg: #ffffff;
+    --av2-bg: #2f7fa3; --av2-fg: #ffffff;
+    --av3-bg: #5d4ba3; --av3-fg: #ffffff;
+    --av4-bg: #9a456c; --av4-fg: #ffffff;
+    --av5-bg: #2b6a86; --av5-fg: #ffffff;
+  }
+}
+
+/* 使用者手動選了深色 */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #14111e;
+  --surface: #1d1929;
+  --surface2: #2a2440;
+  --line: #3a3354;
+  --text: #f5f2fb;
+  --muted: #b5adcb;
+  --lav: #4b3c86;
+  --lavS: #8b72db;
+  --pink: #6b3151;
+  --pinkS: #e07ba6;
+  --blue: #244e63;
+  --blueS: #58b3da;
+  --own: #54428f;
+  --peer: #25475a;
+  --onS: #14111e;
+  --errText: #f4a9c5;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --scrim: rgba(12, 8, 24, 0.7);
+
+  --av0-bg: #7b62c9; --av0-fg: #ffffff;
+  --av1-bg: #b64d7c; --av1-fg: #ffffff;
+  --av2-bg: #2f7fa3; --av2-fg: #ffffff;
+  --av3-bg: #5d4ba3; --av3-fg: #ffffff;
+  --av4-bg: #9a456c; --av4-fg: #ffffff;
+  --av5-bg: #2b6a86; --av5-fg: #ffffff;
+}

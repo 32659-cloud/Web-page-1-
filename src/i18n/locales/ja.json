@@ -1,0 +1,133 @@
+{
+  "app": { "name": "匿名チャット" },
+  "common": { "cancel": "キャンセル", "close": "閉じる", "retry": "再試行" },
+  "entry": {
+    "tagline": "登録もログインも不要。ニックネームを決めてチャットを始めよう。",
+    "nicknameLabel": "ニックネーム",
+    "helper": "1〜20文字、どんな文字でもOKです。",
+    "helperPrefilled": "1〜20文字、どんな文字でもOKです。前回のニックネームを入力しておきました。",
+    "langLabel": "表示言語",
+    "enter": "チャットルームに入る"
+  },
+  "conn": { "connected": "接続中", "reconnecting": "再接続中…", "offline": "オフライン" },
+  "top": { "theme": "ダークモード/ライトモードを切り替え", "language": "表示言語", "leave": "退出", "menu": "メニュー" },
+  "online": {
+    "title": "オンライン",
+    "count": "{{count}}人",
+    "you": "あなた",
+    "chatting": "個別チャット中",
+    "cooling": "待機中",
+    "invite": "個別チャットに招待",
+    "goChat": "個別チャットへ",
+    "cooldown": "あと{{time}}で再招待できます",
+    "pickAction": "{{name}}さんの操作"
+  },
+  "convs": {
+    "title": "チャット",
+    "private": "個別",
+    "quota": "個別チャット {{n}} / {{max}}",
+    "public": "公開ルーム",
+    "pending": "返事を待っています…",
+    "cancelInvite": "招待を取り消す",
+    "peerOffline": "オフライン",
+    "ended": "チャット終了",
+    "photo": "[写真]",
+    "recalled": "メッセージは取り消されました",
+    "empty": "個別チャットはまだありません",
+    "emptyHint": "オンライン一覧で相手を選び、「個別チャットに招待」を押してください"
+  },
+  "chat": {
+    "publicSub": "{{count}}人がオンライン · 直近100件のメッセージ",
+    "placeholder": "メッセージを入力…",
+    "send": "送信",
+    "hint": "Enterで送信 · Shift+Enterで改行",
+    "photo": "写真を送る",
+    "recall": "取り消す",
+    "recalled": "メッセージは取り消されました",
+    "newMessages": "新着メッセージ",
+    "emptyPublic": "まだ誰も話していません",
+    "emptyPublicHint": "最初にあいさつしてみましょう",
+    "endPrivate": "チャットを終了",
+    "peerOnline": "オンライン",
+    "peerOfflineLong": "オフライン · 30分戻らないとチャットは自動的に終了します",
+    "closeWindow": "閉じる",
+    "inputDisabled": "この個別チャットは終了しました",
+    "inputDisabledHint": "入力欄は無効です。「閉じる」でこのウィンドウを消せます。",
+    "back": "個別チャット一覧に戻る",
+    "loading": "読み込み中…",
+    "enlarge": "クリックで写真を拡大"
+  },
+  "system": {
+    "joined": "{{name}}さんが入室しました",
+    "left": "{{name}}さんが退出しました",
+    "chatStarted": "{{name}}さんとの個別チャットが始まりました",
+    "peerOffline": "{{name}}さんはオフラインです",
+    "peerOnline": "{{name}}さんが戻りました"
+  },
+  "ended": {
+    "endedByPeer": "{{name}}さんがチャットを終了しました",
+    "peerLeft": "{{name}}さんが退出したため、チャットは終了しました",
+    "peerTimeout": "{{name}}さんが30分以上オフラインだったため、チャットは終了しました"
+  },
+  "invite": {
+    "from": "{{name}}さんから個別チャットの招待",
+    "more": "ほかに{{count}}件の招待があります",
+    "accept": "承諾",
+    "decline": "断る",
+    "sent": "{{name}}さんを招待しました。返事を待っています",
+    "declined": "{{name}}さんに断られました · 30分後に再招待できます",
+    "busy": "{{name}}さんは今忙しいようです · 後でもう一度どうぞ",
+    "accepted": "{{name}}さんが招待を承諾しました",
+    "cancelledByPeer": "{{name}}さんが招待を取り消しました"
+  },
+  "photo": {
+    "processing": "写真を圧縮しています…",
+    "ready": "{{name}} · 圧縮完了 · {{size}}",
+    "uploading": "アップロード中 {{percent}}%",
+    "cancel": "この写真を取り消す",
+    "preview": "送信する写真のプレビュー",
+    "close": "閉じる",
+    "caption": "{{name}} · {{time}} · 背景のクリック、✕、Escで閉じます",
+    "failed": "アップロードに失敗しました。接続を確認してもう一度お試しください。",
+    "loadingFull": "大きい画像を読み込み中…"
+  },
+  "leaveDlg": {
+    "title": "チャットルームを退出しますか?",
+    "body": "退出すると、すべての個別チャットが終了し、ニックネームも他の人が使えるようになります。よろしいですか?",
+    "confirm": "退出する"
+  },
+  "recallDlg": {
+    "title": "このメッセージを取り消しますか?",
+    "body": "取り消すと全員から見えなくなり、元に戻せません。",
+    "confirm": "取り消す"
+  },
+  "endDlg": {
+    "title": "{{name}}さんとのチャットを終了しますか?",
+    "body": "このチャットのメッセージと写真は削除されます。",
+    "confirm": "チャットを終了"
+  },
+  "tabs": { "public": "公開", "private": "個別", "online": "オンライン" },
+  "title": { "newInvite": "({{count}}) 新しい招待" },
+  "notice": { "sessionExpired": "オフライン時間が長すぎたため、ニックネームが解放されました。もう一度入室してください。" },
+  "errors": {
+    "NICKNAME_INVALID": "ニックネームは1〜20文字にしてください",
+    "NICKNAME_TAKEN": "このニックネームは使用中です。別のものにしてください",
+    "TEXT_TOO_LONG": "500文字を超えています。短くしてください",
+    "RATE_LIMITED": "送信が速すぎます。{{sec}}秒お待ちください",
+    "DUPLICATE_CONTENT": "同じ内容を何度も送らないでください",
+    "IMAGE_RATE_LIMITED": "写真の送信が速すぎます。{{sec}}秒後にもう一度",
+    "IMAGE_TOO_LARGE": "圧縮後も2 MBを超えています。小さい写真を選んでください",
+    "IMAGE_TYPE": "この形式には対応していません。JPG、PNG、WebPを選んでください。",
+    "INVITE_COOLDOWN": "先ほど断られました。あと{{time}}で再招待できます",
+    "INVITE_RATE_LIMITED": "しばらくしてからもう一度招待してください",
+    "INVITE_PENDING": "すでに招待済みです。返事を待っています",
+    "PEER_OFFLINE": "相手はオフラインです",
+    "PEER_CHAT_FULL": "相手の個別チャットが5件に達しています",
+    "SELF_CHAT_FULL": "あなたの個別チャットが5件に達しています",
+    "ALREADY_CHATTING": "この相手とはすでに個別チャット中です",
+    "NOT_ALLOWED": "この操作はできません",
+    "CONVERSATION_ENDED": "この個別チャットは終了しています",
+    "NOT_ENTERED": "先にチャットルームに入ってください",
+    "UNKNOWN": "エラーが発生しました。もう一度お試しください"
+  }
+}

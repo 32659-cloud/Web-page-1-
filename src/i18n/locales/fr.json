@@ -1,0 +1,133 @@
+{
+  "app": { "name": "Chat anonyme" },
+  "common": { "cancel": "Annuler", "close": "Fermer", "retry": "Réessayer" },
+  "entry": {
+    "tagline": "Sans inscription ni connexion. Choisissez un pseudo et discutez.",
+    "nicknameLabel": "Votre pseudo",
+    "helper": "De 1 à 20 caractères, dans n’importe quelle langue.",
+    "helperPrefilled": "De 1 à 20 caractères, dans n’importe quelle langue. Nous avons rempli celui de la dernière fois.",
+    "langLabel": "Langue",
+    "enter": "Entrer dans le salon"
+  },
+  "conn": { "connected": "Connecté", "reconnecting": "Reconnexion…", "offline": "Hors ligne" },
+  "top": { "theme": "Basculer entre mode sombre et clair", "language": "Langue", "leave": "Quitter", "menu": "Menu" },
+  "online": {
+    "title": "En ligne",
+    "count": "{{count}}",
+    "you": "vous",
+    "chatting": "En discussion privée",
+    "cooling": "En attente",
+    "invite": "Inviter en privé",
+    "goChat": "Aller à la discussion privée",
+    "cooldown": "Nouvelle invitation possible dans {{time}}",
+    "pickAction": "Options pour {{name}}"
+  },
+  "convs": {
+    "title": "Discussions",
+    "private": "Privées",
+    "quota": "Privées {{n}} / {{max}}",
+    "public": "Salon public",
+    "pending": "En attente de réponse…",
+    "cancelInvite": "Annuler l’invitation",
+    "peerOffline": "Hors ligne",
+    "ended": "Discussion terminée",
+    "photo": "[Photo]",
+    "recalled": "Message retiré",
+    "empty": "Aucune discussion privée",
+    "emptyHint": "Cliquez sur quelqu’un dans la liste et choisissez « Inviter en privé »"
+  },
+  "chat": {
+    "publicSub": "{{count}} en ligne · 100 derniers messages",
+    "placeholder": "Écrivez un message…",
+    "send": "Envoyer",
+    "hint": "Entrée pour envoyer · Maj+Entrée pour un retour à la ligne",
+    "photo": "Envoyer une photo",
+    "recall": "Retirer",
+    "recalled": "Message retiré",
+    "newMessages": "Nouveaux messages",
+    "emptyPublic": "Personne n’a encore parlé",
+    "emptyPublicHint": "Et si vous disiez bonjour ?",
+    "endPrivate": "Terminer",
+    "peerOnline": "En ligne",
+    "peerOfflineLong": "Hors ligne · la discussion se termine seule après 30 minutes",
+    "closeWindow": "Fermer",
+    "inputDisabled": "Cette discussion privée est terminée",
+    "inputDisabledHint": "La saisie est désactivée. Appuyez sur « Fermer » pour retirer cette fenêtre.",
+    "back": "Retour aux discussions privées",
+    "loading": "Chargement…",
+    "enlarge": "Cliquez pour agrandir la photo"
+  },
+  "system": {
+    "joined": "{{name}} est arrivé(e)",
+    "left": "{{name}} est parti(e)",
+    "chatStarted": "Votre discussion privée avec {{name}} a commencé",
+    "peerOffline": "{{name}} est hors ligne",
+    "peerOnline": "{{name}} est de retour"
+  },
+  "ended": {
+    "endedByPeer": "{{name}} a terminé la discussion",
+    "peerLeft": "{{name}} est parti(e), la discussion est terminée",
+    "peerTimeout": "{{name}} est resté(e) hors ligne plus de 30 minutes, la discussion est terminée"
+  },
+  "invite": {
+    "from": "{{name}} vous invite en privé",
+    "more": "{{count}} autre(s) en attente",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "sent": "{{name}} est invité(e). En attente de réponse",
+    "declined": "{{name}} a refusé votre invitation · nouvelle invitation possible dans 30 minutes",
+    "busy": "{{name}} est occupé(e) pour le moment · réessayez plus tard",
+    "accepted": "{{name}} a accepté votre invitation",
+    "cancelledByPeer": "{{name}} a annulé l’invitation"
+  },
+  "photo": {
+    "processing": "Compression de la photo…",
+    "ready": "{{name}} · compressée · {{size}}",
+    "uploading": "Envoi {{percent}} %",
+    "cancel": "Retirer cette photo",
+    "preview": "Aperçu de la photo à envoyer",
+    "close": "Fermer",
+    "caption": "{{name}} · {{time}} · cliquez sur le fond, sur ✕ ou appuyez sur Échap pour fermer",
+    "failed": "Échec de l’envoi. Vérifiez votre connexion et réessayez.",
+    "loadingFull": "Chargement de la photo en grand…"
+  },
+  "leaveDlg": {
+    "title": "Quitter le salon ?",
+    "body": "Si vous quittez, toutes vos discussions privées se terminent et votre pseudo est libéré. Confirmer ?",
+    "confirm": "Quitter"
+  },
+  "recallDlg": {
+    "title": "Retirer ce message ?",
+    "body": "Personne ne pourra plus le voir, et c’est irréversible.",
+    "confirm": "Retirer"
+  },
+  "endDlg": {
+    "title": "Terminer la discussion avec {{name}} ?",
+    "body": "Les messages et photos de cette discussion seront supprimés.",
+    "confirm": "Terminer"
+  },
+  "tabs": { "public": "Public", "private": "Privées", "online": "En ligne" },
+  "title": { "newInvite": "({{count}}) Nouvelle invitation" },
+  "notice": { "sessionExpired": "Vous êtes resté hors ligne trop longtemps et votre pseudo a été libéré. Entrez à nouveau." },
+  "errors": {
+    "NICKNAME_INVALID": "Le pseudo doit contenir de 1 à 20 caractères",
+    "NICKNAME_TAKEN": "Ce pseudo est déjà utilisé. Choisissez-en un autre",
+    "TEXT_TOO_LONG": "Plus de 500 caractères. Raccourcissez-le",
+    "RATE_LIMITED": "Vous envoyez trop vite. Attendez {{sec}} s",
+    "DUPLICATE_CONTENT": "Merci de ne pas répéter le même message",
+    "IMAGE_RATE_LIMITED": "Photos envoyées trop vite. Réessayez dans {{sec}} s",
+    "IMAGE_TOO_LARGE": "La photo dépasse encore 2 Mo après compression. Choisissez-en une plus petite",
+    "IMAGE_TYPE": "Format non pris en charge. Choisissez JPG, PNG ou WebP.",
+    "INVITE_COOLDOWN": "Cette personne vient de refuser. Nouvelle invitation possible dans {{time}}",
+    "INVITE_RATE_LIMITED": "Patientez un peu avant de réinviter",
+    "INVITE_PENDING": "Vous avez déjà invité cette personne. En attente de réponse",
+    "PEER_OFFLINE": "Cette personne est hors ligne",
+    "PEER_CHAT_FULL": "Cette personne a déjà 5 discussions privées",
+    "SELF_CHAT_FULL": "Vous avez déjà 5 discussions privées",
+    "ALREADY_CHATTING": "Vous avez déjà une discussion privée avec cette personne",
+    "NOT_ALLOWED": "Action non autorisée",
+    "CONVERSATION_ENDED": "Cette discussion privée est terminée",
+    "NOT_ENTERED": "Entrez d’abord dans le salon",
+    "UNKNOWN": "Une erreur s’est produite. Réessayez"
+  }
+}

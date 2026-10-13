@@ -1,0 +1,133 @@
+{
+  "app": { "name": "익명 채팅" },
+  "common": { "cancel": "취소", "close": "닫기", "retry": "다시 시도" },
+  "entry": {
+    "tagline": "가입도 로그인도 필요 없어요. 닉네임만 정하고 바로 채팅하세요.",
+    "nicknameLabel": "닉네임",
+    "helper": "1~20자, 어떤 문자든 괜찮아요.",
+    "helperPrefilled": "1~20자, 어떤 문자든 괜찮아요. 지난번에 쓴 닉네임을 채워 두었어요.",
+    "langLabel": "언어",
+    "enter": "채팅방 입장"
+  },
+  "conn": { "connected": "연결됨", "reconnecting": "다시 연결 중…", "offline": "오프라인" },
+  "top": { "theme": "다크/라이트 모드 전환", "language": "언어", "leave": "나가기", "menu": "메뉴" },
+  "online": {
+    "title": "접속 중",
+    "count": "{{count}}명",
+    "you": "나",
+    "chatting": "1:1 대화 중",
+    "cooling": "대기 중",
+    "invite": "1:1 대화 초대",
+    "goChat": "1:1 대화로 이동",
+    "cooldown": "{{time}} 후에 다시 초대할 수 있어요",
+    "pickAction": "{{name}} 님 메뉴"
+  },
+  "convs": {
+    "title": "대화",
+    "private": "1:1",
+    "quota": "1:1 대화 {{n}} / {{max}}",
+    "public": "공개 채팅방",
+    "pending": "응답을 기다리는 중…",
+    "cancelInvite": "초대 취소",
+    "peerOffline": "오프라인",
+    "ended": "대화 종료",
+    "photo": "[사진]",
+    "recalled": "메시지가 삭제되었어요",
+    "empty": "아직 1:1 대화가 없어요",
+    "emptyHint": "접속 중 목록에서 한 명을 눌러 ‘1:1 대화 초대’를 선택하세요"
+  },
+  "chat": {
+    "publicSub": "{{count}}명 접속 중 · 최근 메시지 100개",
+    "placeholder": "메시지를 입력하세요…",
+    "send": "보내기",
+    "hint": "Enter로 보내기 · Shift+Enter로 줄바꿈",
+    "photo": "사진 보내기",
+    "recall": "삭제",
+    "recalled": "메시지가 삭제되었어요",
+    "newMessages": "새 메시지",
+    "emptyPublic": "아직 아무도 말하지 않았어요",
+    "emptyPublicHint": "먼저 인사해 보세요",
+    "endPrivate": "대화 종료",
+    "peerOnline": "접속 중",
+    "peerOfflineLong": "오프라인 · 30분 안에 돌아오지 않으면 대화가 자동으로 종료돼요",
+    "closeWindow": "닫기",
+    "inputDisabled": "이 1:1 대화는 종료되었어요",
+    "inputDisabledHint": "입력창이 비활성화되었어요. ‘닫기’를 눌러 이 창을 지우세요.",
+    "back": "1:1 대화 목록으로",
+    "loading": "불러오는 중…",
+    "enlarge": "눌러서 사진 확대"
+  },
+  "system": {
+    "joined": "{{name}} 님이 들어왔어요",
+    "left": "{{name}} 님이 나갔어요",
+    "chatStarted": "{{name}} 님과의 1:1 대화가 시작되었어요",
+    "peerOffline": "{{name}} 님이 오프라인이에요",
+    "peerOnline": "{{name}} 님이 돌아왔어요"
+  },
+  "ended": {
+    "endedByPeer": "{{name}} 님이 대화를 종료했어요",
+    "peerLeft": "{{name}} 님이 나가서 대화가 종료되었어요",
+    "peerTimeout": "{{name}} 님이 30분 넘게 오프라인이어서 대화가 종료되었어요"
+  },
+  "invite": {
+    "from": "{{name}} 님이 1:1 대화를 초대했어요",
+    "more": "대기 중인 초대가 {{count}}개 더 있어요",
+    "accept": "수락",
+    "decline": "거절",
+    "sent": "{{name}} 님을 초대했어요. 응답을 기다리는 중",
+    "declined": "{{name}} 님이 초대를 거절했어요 · 30분 후에 다시 초대할 수 있어요",
+    "busy": "{{name}} 님은 지금 바빠요 · 나중에 다시 초대해 보세요",
+    "accepted": "{{name}} 님이 초대를 수락했어요",
+    "cancelledByPeer": "{{name}} 님이 초대를 취소했어요"
+  },
+  "photo": {
+    "processing": "사진을 압축하는 중…",
+    "ready": "{{name}} · 압축 완료 · {{size}}",
+    "uploading": "업로드 중 {{percent}}%",
+    "cancel": "이 사진 취소",
+    "preview": "보낼 사진 미리보기",
+    "close": "닫기",
+    "caption": "{{name}} · {{time}} · 배경 클릭, ✕ 또는 Esc로 닫기",
+    "failed": "업로드에 실패했어요. 연결을 확인하고 다시 시도하세요.",
+    "loadingFull": "큰 사진을 불러오는 중…"
+  },
+  "leaveDlg": {
+    "title": "채팅방을 나갈까요?",
+    "body": "나가면 모든 1:1 대화가 종료되고 닉네임도 다른 사람이 쓸 수 있게 돼요. 계속할까요?",
+    "confirm": "나가기"
+  },
+  "recallDlg": {
+    "title": "이 메시지를 삭제할까요?",
+    "body": "삭제하면 모두에게 보이지 않고 되돌릴 수 없어요.",
+    "confirm": "삭제"
+  },
+  "endDlg": {
+    "title": "{{name}} 님과의 대화를 종료할까요?",
+    "body": "이 대화의 메시지와 사진이 모두 삭제돼요.",
+    "confirm": "대화 종료"
+  },
+  "tabs": { "public": "공개", "private": "1:1", "online": "접속 중" },
+  "title": { "newInvite": "({{count}}) 새 초대" },
+  "notice": { "sessionExpired": "오프라인 시간이 너무 길어 닉네임이 해제되었어요. 다시 입장해 주세요." },
+  "errors": {
+    "NICKNAME_INVALID": "닉네임은 1~20자여야 해요",
+    "NICKNAME_TAKEN": "이미 사용 중인 닉네임이에요. 다른 닉네임을 골라 주세요",
+    "TEXT_TOO_LONG": "500자를 넘었어요. 줄여 주세요",
+    "RATE_LIMITED": "너무 빨리 보내고 있어요. {{sec}}초만 기다려 주세요",
+    "DUPLICATE_CONTENT": "같은 내용을 반복해서 보내지 마세요",
+    "IMAGE_RATE_LIMITED": "사진을 너무 빨리 보내고 있어요. {{sec}}초 후에 다시 보내세요",
+    "IMAGE_TOO_LARGE": "압축 후에도 2 MB를 넘어요. 더 작은 사진을 골라 주세요",
+    "IMAGE_TYPE": "지원하지 않는 형식이에요. JPG, PNG, WebP를 선택하세요.",
+    "INVITE_COOLDOWN": "방금 거절당했어요. {{time}} 후에 다시 초대할 수 있어요",
+    "INVITE_RATE_LIMITED": "잠시 후에 다시 초대해 주세요",
+    "INVITE_PENDING": "이미 초대했어요. 응답을 기다리는 중이에요",
+    "PEER_OFFLINE": "상대방이 오프라인이에요",
+    "PEER_CHAT_FULL": "상대방의 1:1 대화가 5개로 가득 찼어요",
+    "SELF_CHAT_FULL": "내 1:1 대화가 5개로 가득 찼어요",
+    "ALREADY_CHATTING": "이 사람과는 이미 1:1 대화 중이에요",
+    "NOT_ALLOWED": "할 수 없는 동작이에요",
+    "CONVERSATION_ENDED": "이 1:1 대화는 이미 종료되었어요",
+    "NOT_ENTERED": "먼저 채팅방에 입장하세요",
+    "UNKNOWN": "문제가 발생했어요. 잠시 후 다시 시도하세요"
+  }
+}

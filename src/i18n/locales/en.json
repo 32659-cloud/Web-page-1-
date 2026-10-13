@@ -1,0 +1,133 @@
+{
+  "app": { "name": "Anonymous Chat" },
+  "common": { "cancel": "Cancel", "close": "Close", "retry": "Retry" },
+  "entry": {
+    "tagline": "No sign-up, no login. Pick a nickname and start chatting.",
+    "nicknameLabel": "Your nickname",
+    "helper": "1 to 20 characters, any language.",
+    "helperPrefilled": "1 to 20 characters, any language. We filled in the one you used last time.",
+    "langLabel": "Language",
+    "enter": "Enter chat room"
+  },
+  "conn": { "connected": "Connected", "reconnecting": "Reconnecting…", "offline": "Offline" },
+  "top": { "theme": "Switch dark or light mode", "language": "Language", "leave": "Leave", "menu": "Menu" },
+  "online": {
+    "title": "Online",
+    "count": "{{count}}",
+    "you": "you",
+    "chatting": "In a chat",
+    "cooling": "Cooling down",
+    "invite": "Invite to private chat",
+    "goChat": "Go to private chat",
+    "cooldown": "Can invite again in {{time}}",
+    "pickAction": "Options for {{name}}"
+  },
+  "convs": {
+    "title": "Chats",
+    "private": "Private",
+    "quota": "Private {{n}} / {{max}}",
+    "public": "Public room",
+    "pending": "Waiting for reply…",
+    "cancelInvite": "Cancel invite",
+    "peerOffline": "Offline",
+    "ended": "Chat ended",
+    "photo": "[Photo]",
+    "recalled": "Message recalled",
+    "empty": "No private chats yet",
+    "emptyHint": "Click someone in the online list and choose “Invite to private chat”"
+  },
+  "chat": {
+    "publicSub": "{{count}} online · last 100 messages",
+    "placeholder": "Type a message…",
+    "send": "Send",
+    "hint": "Enter to send · Shift+Enter for a new line",
+    "photo": "Send a photo",
+    "recall": "Recall",
+    "recalled": "Message recalled",
+    "newMessages": "New messages",
+    "emptyPublic": "Nobody has said anything yet",
+    "emptyPublicHint": "Why not say hi first?",
+    "endPrivate": "End chat",
+    "peerOnline": "Online",
+    "peerOfflineLong": "Offline · the chat ends automatically after 30 minutes",
+    "closeWindow": "Close",
+    "inputDisabled": "This private chat has ended",
+    "inputDisabledHint": "The input is disabled. Press “Close” to remove this window.",
+    "back": "Back to private chats",
+    "loading": "Loading…",
+    "enlarge": "Click to enlarge photo"
+  },
+  "system": {
+    "joined": "{{name}} joined",
+    "left": "{{name}} left",
+    "chatStarted": "Your private chat with {{name}} has started",
+    "peerOffline": "{{name}} is offline",
+    "peerOnline": "{{name}} is back"
+  },
+  "ended": {
+    "endedByPeer": "{{name}} ended the chat",
+    "peerLeft": "{{name}} left, so the chat ended",
+    "peerTimeout": "{{name}} was offline for over 30 minutes, so the chat ended"
+  },
+  "invite": {
+    "from": "{{name}} invites you to a private chat",
+    "more": "{{count}} more waiting",
+    "accept": "Accept",
+    "decline": "Decline",
+    "sent": "Invited {{name}}. Waiting for a reply",
+    "declined": "{{name}} declined your invitation · you can invite them again in 30 minutes",
+    "busy": "{{name}} is busy right now · try again later",
+    "accepted": "{{name}} accepted your invitation",
+    "cancelledByPeer": "{{name}} cancelled the invitation"
+  },
+  "photo": {
+    "processing": "Compressing photo…",
+    "ready": "{{name}} · compressed · {{size}}",
+    "uploading": "Uploading {{percent}}%",
+    "cancel": "Remove this photo",
+    "preview": "Preview of the photo to send",
+    "close": "Close",
+    "caption": "{{name}} · {{time}} · click the background, press ✕ or Esc to close",
+    "failed": "Upload failed. Check your connection and try again.",
+    "loadingFull": "Loading full-size photo…"
+  },
+  "leaveDlg": {
+    "title": "Leave the chat room?",
+    "body": "If you leave, all your private chats end and your nickname is released for others. Are you sure?",
+    "confirm": "Leave"
+  },
+  "recallDlg": {
+    "title": "Recall this message?",
+    "body": "Nobody will be able to see it, and it can’t be undone.",
+    "confirm": "Recall"
+  },
+  "endDlg": {
+    "title": "End your chat with {{name}}?",
+    "body": "Messages and photos in this chat will be deleted.",
+    "confirm": "End chat"
+  },
+  "tabs": { "public": "Public", "private": "Private", "online": "Online" },
+  "title": { "newInvite": "({{count}}) New invitation" },
+  "notice": { "sessionExpired": "You were offline too long and your nickname was released. Please enter again." },
+  "errors": {
+    "NICKNAME_INVALID": "Nickname must be 1 to 20 characters",
+    "NICKNAME_TAKEN": "That nickname is already in use. Please pick another",
+    "TEXT_TOO_LONG": "Over 500 characters. Please shorten it",
+    "RATE_LIMITED": "You’re sending too fast. Wait {{sec}} s",
+    "DUPLICATE_CONTENT": "Please don’t send the same thing again and again",
+    "IMAGE_RATE_LIMITED": "Sending photos too fast. Try again in {{sec}} s",
+    "IMAGE_TOO_LARGE": "The photo is still over 2 MB after compression. Choose a smaller one",
+    "IMAGE_TYPE": "That format isn’t supported. Choose a JPG, PNG or WebP.",
+    "INVITE_COOLDOWN": "They just declined your invitation. You can invite again in {{time}}",
+    "INVITE_RATE_LIMITED": "Please wait a bit before inviting again",
+    "INVITE_PENDING": "You already invited this person. Waiting for a reply",
+    "PEER_OFFLINE": "They are offline",
+    "PEER_CHAT_FULL": "They already have 5 private chats",
+    "SELF_CHAT_FULL": "You already have 5 private chats",
+    "ALREADY_CHATTING": "You already have a private chat with this person",
+    "NOT_ALLOWED": "You can’t do that",
+    "CONVERSATION_ENDED": "This private chat has ended",
+    "NOT_ENTERED": "Please enter the chat room first",
+    "UNKNOWN": "Something went wrong. Please try again"
+  }
+}

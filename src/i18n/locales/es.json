@@ -1,0 +1,133 @@
+{
+  "app": { "name": "Chat anónimo" },
+  "common": { "cancel": "Cancelar", "close": "Cerrar", "retry": "Reintentar" },
+  "entry": {
+    "tagline": "Sin registro ni inicio de sesión. Elige un apodo y empieza a chatear.",
+    "nicknameLabel": "Tu apodo",
+    "helper": "De 1 a 20 caracteres, en cualquier idioma.",
+    "helperPrefilled": "De 1 a 20 caracteres, en cualquier idioma. Hemos puesto el que usaste la última vez.",
+    "langLabel": "Idioma",
+    "enter": "Entrar al chat"
+  },
+  "conn": { "connected": "Conectado", "reconnecting": "Reconectando…", "offline": "Sin conexión" },
+  "top": { "theme": "Cambiar modo oscuro o claro", "language": "Idioma", "leave": "Salir", "menu": "Menú" },
+  "online": {
+    "title": "En línea",
+    "count": "{{count}}",
+    "you": "tú",
+    "chatting": "En chat privado",
+    "cooling": "En espera",
+    "invite": "Invitar a chat privado",
+    "goChat": "Ir al chat privado",
+    "cooldown": "Podrás invitar de nuevo en {{time}}",
+    "pickAction": "Opciones de {{name}}"
+  },
+  "convs": {
+    "title": "Chats",
+    "private": "Privados",
+    "quota": "Privados {{n}} / {{max}}",
+    "public": "Sala pública",
+    "pending": "Esperando respuesta…",
+    "cancelInvite": "Cancelar invitación",
+    "peerOffline": "Sin conexión",
+    "ended": "Chat terminado",
+    "photo": "[Foto]",
+    "recalled": "Mensaje retirado",
+    "empty": "Aún no hay chats privados",
+    "emptyHint": "Haz clic en alguien de la lista y elige «Invitar a chat privado»"
+  },
+  "chat": {
+    "publicSub": "{{count}} en línea · últimos 100 mensajes",
+    "placeholder": "Escribe un mensaje…",
+    "send": "Enviar",
+    "hint": "Enter para enviar · Shift+Enter para nueva línea",
+    "photo": "Enviar una foto",
+    "recall": "Retirar",
+    "recalled": "Mensaje retirado",
+    "newMessages": "Mensajes nuevos",
+    "emptyPublic": "Nadie ha dicho nada todavía",
+    "emptyPublicHint": "¿Por qué no saludas tú primero?",
+    "endPrivate": "Terminar chat",
+    "peerOnline": "En línea",
+    "peerOfflineLong": "Sin conexión · el chat termina solo tras 30 minutos",
+    "closeWindow": "Cerrar",
+    "inputDisabled": "Este chat privado ha terminado",
+    "inputDisabledHint": "La entrada está desactivada. Pulsa «Cerrar» para quitar esta ventana.",
+    "back": "Volver a chats privados",
+    "loading": "Cargando…",
+    "enlarge": "Haz clic para ampliar la foto"
+  },
+  "system": {
+    "joined": "{{name}} ha entrado",
+    "left": "{{name}} se ha ido",
+    "chatStarted": "Tu chat privado con {{name}} ha comenzado",
+    "peerOffline": "{{name}} está sin conexión",
+    "peerOnline": "{{name}} ha vuelto"
+  },
+  "ended": {
+    "endedByPeer": "{{name}} terminó el chat",
+    "peerLeft": "{{name}} se fue, así que el chat terminó",
+    "peerTimeout": "{{name}} estuvo sin conexión más de 30 minutos, así que el chat terminó"
+  },
+  "invite": {
+    "from": "{{name}} te invita a un chat privado",
+    "more": "{{count}} más esperando",
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "sent": "Invitaste a {{name}}. Esperando respuesta",
+    "declined": "{{name}} rechazó tu invitación · podrás invitar de nuevo en 30 minutos",
+    "busy": "{{name}} está ocupado ahora · inténtalo más tarde",
+    "accepted": "{{name}} aceptó tu invitación",
+    "cancelledByPeer": "{{name}} canceló la invitación"
+  },
+  "photo": {
+    "processing": "Comprimiendo la foto…",
+    "ready": "{{name}} · comprimida · {{size}}",
+    "uploading": "Subiendo {{percent}}%",
+    "cancel": "Quitar esta foto",
+    "preview": "Vista previa de la foto a enviar",
+    "close": "Cerrar",
+    "caption": "{{name}} · {{time}} · haz clic en el fondo, en ✕ o pulsa Esc para cerrar",
+    "failed": "Error al subir. Revisa tu conexión e inténtalo de nuevo.",
+    "loadingFull": "Cargando foto completa…"
+  },
+  "leaveDlg": {
+    "title": "¿Salir del chat?",
+    "body": "Si sales, todos tus chats privados terminan y tu apodo queda libre para otros. ¿Seguro?",
+    "confirm": "Salir"
+  },
+  "recallDlg": {
+    "title": "¿Retirar este mensaje?",
+    "body": "Nadie podrá verlo y no se puede deshacer.",
+    "confirm": "Retirar"
+  },
+  "endDlg": {
+    "title": "¿Terminar tu chat con {{name}}?",
+    "body": "Los mensajes y fotos de este chat se borrarán.",
+    "confirm": "Terminar chat"
+  },
+  "tabs": { "public": "Público", "private": "Privados", "online": "En línea" },
+  "title": { "newInvite": "({{count}}) Nueva invitación" },
+  "notice": { "sessionExpired": "Estuviste sin conexión demasiado tiempo y tu apodo se liberó. Entra de nuevo." },
+  "errors": {
+    "NICKNAME_INVALID": "El apodo debe tener de 1 a 20 caracteres",
+    "NICKNAME_TAKEN": "Ese apodo ya está en uso. Elige otro",
+    "TEXT_TOO_LONG": "Más de 500 caracteres. Acórtalo",
+    "RATE_LIMITED": "Envías demasiado rápido. Espera {{sec}} s",
+    "DUPLICATE_CONTENT": "No envíes lo mismo una y otra vez",
+    "IMAGE_RATE_LIMITED": "Envías fotos demasiado rápido. Prueba en {{sec}} s",
+    "IMAGE_TOO_LARGE": "La foto sigue pesando más de 2 MB tras comprimir. Elige una más pequeña",
+    "IMAGE_TYPE": "Formato no admitido. Elige JPG, PNG o WebP.",
+    "INVITE_COOLDOWN": "Acaba de rechazarte. Podrás invitar de nuevo en {{time}}",
+    "INVITE_RATE_LIMITED": "Espera un poco antes de invitar de nuevo",
+    "INVITE_PENDING": "Ya invitaste a esta persona. Esperando respuesta",
+    "PEER_OFFLINE": "Esa persona está sin conexión",
+    "PEER_CHAT_FULL": "Esa persona ya tiene 5 chats privados",
+    "SELF_CHAT_FULL": "Ya tienes 5 chats privados",
+    "ALREADY_CHATTING": "Ya tienes un chat privado con esta persona",
+    "NOT_ALLOWED": "No puedes hacer eso",
+    "CONVERSATION_ENDED": "Este chat privado ha terminado",
+    "NOT_ENTERED": "Primero entra al chat",
+    "UNKNOWN": "Algo salió mal. Inténtalo de nuevo"
+  }
+}

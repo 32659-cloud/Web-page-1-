@@ -1,0 +1,133 @@
+{
+  "app": { "name": "匿名聊天室" },
+  "common": { "cancel": "取消", "close": "關閉", "retry": "重試" },
+  "entry": {
+    "tagline": "不用註冊、不用登入。取一個代號就能進來聊天。",
+    "nicknameLabel": "你的代號",
+    "helper": "1 到 20 個字,可以用任何文字。",
+    "helperPrefilled": "1 到 20 個字,可以用任何文字。已幫你填好上次用的代號。",
+    "langLabel": "介面語言",
+    "enter": "進入聊天室"
+  },
+  "conn": { "connected": "已連線", "reconnecting": "重新連線中…", "offline": "已離線" },
+  "top": { "theme": "切換深色或淺色模式", "language": "介面語言", "leave": "離開", "menu": "選單" },
+  "online": {
+    "title": "線上",
+    "count": "{{count}} 人",
+    "you": "你",
+    "chatting": "私聊中",
+    "cooling": "冷卻中",
+    "invite": "邀請私聊",
+    "goChat": "前往私聊",
+    "cooldown": "{{time}} 後可再邀請",
+    "pickAction": "{{name}} 的選項"
+  },
+  "convs": {
+    "title": "對話",
+    "private": "私聊",
+    "quota": "私聊 {{n}} / {{max}}",
+    "public": "公開聊天室",
+    "pending": "等待回應…",
+    "cancelInvite": "取消邀請",
+    "peerOffline": "對方離線中",
+    "ended": "私聊已結束",
+    "photo": "[照片]",
+    "recalled": "此訊息已收回",
+    "empty": "還沒有私聊",
+    "emptyHint": "在線上名單點一個人,按「邀請私聊」"
+  },
+  "chat": {
+    "publicSub": "{{count}} 人在線 · 最近 100 則訊息",
+    "placeholder": "輸入訊息…",
+    "send": "送出",
+    "hint": "Enter 送出 · Shift+Enter 換行",
+    "photo": "傳照片",
+    "recall": "收回",
+    "recalled": "此訊息已收回",
+    "newMessages": "有新訊息",
+    "emptyPublic": "還沒有人說話",
+    "emptyPublicHint": "你可以先打聲招呼",
+    "endPrivate": "結束私聊",
+    "peerOnline": "在線",
+    "peerOfflineLong": "離線中 · 30 分鐘內沒回來,私聊會自動結束",
+    "closeWindow": "關閉",
+    "inputDisabled": "這個私聊已經結束",
+    "inputDisabledHint": "輸入框已停用。按「關閉」移除這個視窗。",
+    "back": "返回私聊清單",
+    "loading": "載入中…",
+    "enlarge": "點擊放大照片"
+  },
+  "system": {
+    "joined": "{{name}} 進來了",
+    "left": "{{name}} 離開了",
+    "chatStarted": "你和 {{name}} 的私聊開始了",
+    "peerOffline": "{{name}} 離線中",
+    "peerOnline": "{{name}} 回來了"
+  },
+  "ended": {
+    "endedByPeer": "{{name}} 已結束私聊",
+    "peerLeft": "{{name}} 已離開,私聊結束",
+    "peerTimeout": "{{name}} 離線超過 30 分鐘,私聊已結束"
+  },
+  "invite": {
+    "from": "{{name}} 邀請你私聊",
+    "more": "還有 {{count}} 個邀請在等你",
+    "accept": "接受",
+    "decline": "拒絕",
+    "sent": "已邀請 {{name}},等待回應",
+    "declined": "{{name}} 拒絕了你的邀請 · 30 分鐘後才能再邀請這個人",
+    "busy": "{{name}} 目前正在忙 · 你可以稍後再邀請",
+    "accepted": "{{name}} 接受了你的邀請",
+    "cancelledByPeer": "{{name}} 取消了邀請"
+  },
+  "photo": {
+    "processing": "正在壓縮照片…",
+    "ready": "{{name}} · 壓縮完成 · {{size}}",
+    "uploading": "上傳中 {{percent}}%",
+    "cancel": "取消這張照片",
+    "preview": "待送出的照片預覽",
+    "close": "關閉",
+    "caption": "{{name}} · {{time}} · 點背景、按 ✕ 或 Esc 關閉",
+    "failed": "上傳失敗。請檢查網路後重試。",
+    "loadingFull": "載入大圖中…"
+  },
+  "leaveDlg": {
+    "title": "離開聊天室?",
+    "body": "離開後,你的所有私聊都會結束,代號也會釋放給別人使用。確定嗎?",
+    "confirm": "確定離開"
+  },
+  "recallDlg": {
+    "title": "收回這則訊息?",
+    "body": "收回後所有人都看不到,也不能復原。",
+    "confirm": "收回"
+  },
+  "endDlg": {
+    "title": "結束和 {{name}} 的私聊?",
+    "body": "結束後,這個私聊的訊息和照片都會刪除。",
+    "confirm": "結束私聊"
+  },
+  "tabs": { "public": "公開", "private": "私聊", "online": "線上" },
+  "title": { "newInvite": "({{count}}) 有新邀請" },
+  "notice": { "sessionExpired": "你離線太久,代號已釋放。請重新進入。" },
+  "errors": {
+    "NICKNAME_INVALID": "代號要 1 到 20 個字",
+    "NICKNAME_TAKEN": "這個代號已被使用,請換一個",
+    "TEXT_TOO_LONG": "超過 500 字,請刪減後再送出",
+    "RATE_LIMITED": "送太快了,請稍等 {{sec}} 秒",
+    "DUPLICATE_CONTENT": "請不要重複送出相同內容",
+    "IMAGE_RATE_LIMITED": "照片傳太快了,請 {{sec}} 秒後再傳",
+    "IMAGE_TOO_LARGE": "照片壓縮後仍超過 2 MB,請換一張較小的",
+    "IMAGE_TYPE": "這個格式不支援。請選 JPG、PNG 或 WebP。",
+    "INVITE_COOLDOWN": "對方剛拒絕了你的邀請,{{time}} 後才能再邀請",
+    "INVITE_RATE_LIMITED": "請稍後再邀請",
+    "INVITE_PENDING": "你已經邀請過這個人,請等待回應",
+    "PEER_OFFLINE": "對方已離線",
+    "PEER_CHAT_FULL": "對方的私聊已滿 5 個",
+    "SELF_CHAT_FULL": "你的私聊已滿 5 個",
+    "ALREADY_CHATTING": "你和這個人已經有一個私聊",
+    "NOT_ALLOWED": "沒有權限做這件事",
+    "CONVERSATION_ENDED": "這個私聊已經結束",
+    "NOT_ENTERED": "請先進入聊天室",
+    "UNKNOWN": "發生錯誤,請稍後再試"
+  }
+}
