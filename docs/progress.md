@@ -1,7 +1,32 @@
 # 進度與待辦
 
-最後更新:2026-10-14(下午)
+最後更新:2026-10-14(晚上)
 目前階段:**階段二(接上 Supabase):資料庫與通訊層已完成並在真實專案上驗證通過;正式網址已切換成真實後端(`deploy.yml` 的 `VITE_BACKEND: supabase`),等手機實測回報**
+
+## 接手說明(給下一次的對話)——先讀這一段
+
+**現況(2026-10-14 晚上)**:作業功能全部完成,正式網址 https://32659-cloud.github.io/Web-page-1-/ 用真實的 Supabase 後端(專案 `ibadmcwdkvyvxjmimsjo`)。GitHub 上最新的 commit 是 `make leave dialog the only match for leave buttons`;之後只有這份 `progress.md` 的修改在本機(還沒 push)。
+
+**這個作業有被 AI 評分器評分**(使用者貼評分結果給我)。評分器用 `AIgraderA/B/C` 三個代號進入聊天室,送 `[AI grader agent]` 開頭的訊息。評分標準使用者還在研究。
+
+**評分紀錄**
+1. 第一次、第二次:總分 4/10,**唯一失分是「B2 線上狀態」:B 離開後,A 的線上名單 45 秒內沒更新**(其餘基本分都過,新增功能因此沒計分)。
+2. 我自己重現不出來(按 Leave、關網頁、重新整理都正常),直到發現:用「名稱含 leave 的第一個按鈕」連點兩次的自動化方式,**10 次有 10 次根本沒離開成功**(背景同名的 Leave 按鈕被當成第一個)。已修:離開確認視窗開啟時,背景設 `aria-hidden` 加 `inert`,視窗放在 DOM 最前面。修好後同樣的測試 8/8 成功,正式網址 4/4 成功,約 0.5 秒反映。這是**推測**的原因,不確定評分器真的是這樣做,所以**待重新評分確認**。
+3. 其他已做的補強:按「離開」前先 untrack 再廣播(有時間上限);網路悄悄中斷時,每 10 秒的在線心跳、28 秒沒更新就視為離線(約 25–30 秒);離開後記住最後心跳編號,避免舊的 Presence 資料把人又加回來;收到的資料先檢查才顯示(`validate.ts`);文件補了新增功能、已知限制、驗證清單打勾。
+
+**下一步**:使用者會重新評分,把結果貼給我。如果還是 B2 失敗,從評分器的做法下手(它怎麼讓 B 離開、怎麼判斷名單),不要只改後端。
+
+**注意事項(很重要)**
+- **回覆一律用繁體中文**,不要用日文或其他語言。使用者不寫程式,要一步一步、白話、說清楚點哪裡。
+- **匿名登入有次數限制**。我測試太多次會被擋(HTTP 429,進入畫面顯示「Something went wrong」)。使用者已在 Supabase 後台把 Rate Limits 的匿名登入調高;測試前先用 `curl -X POST .../auth/v1/signup` 試一次是不是 200。
+- 我的端對端測試與安全測試會在公開聊天室留下訊息。**評分前要請使用者清掉**:SQL Editor 執行 `delete from public.public_messages;`(可用 PowerShell `Set-Clipboard` 複製給使用者,提醒他貼上前不要複製別的)。
+- 使用者評分期間不要自己開著網站、不要部署(部署會短暫換版)。
+- 測試指令:`npm test`(66 個)、`npm run build`、`npm run test:e2e`(需先 `npm run dev`,`.env.local` 的 `VITE_BACKEND=supabase`)、`npm run test:security`。本機網址用 `http://localhost:5173/`(不是 127.0.0.1)。
+- Bash 工具遇到含大量引號的 heredoc 會壞掉;長的 Python 或 SQL 改用 Write 工具寫成檔案再執行。
+- 不用在 README 或文件註明 AI 協助(使用者的課程本來就是教用 AI 做網站)。
+- commit 要結尾加 `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>`。部署前先問使用者(之前都是這樣做的)。
+
+**已決定不做**:升級 `vite`/`vitest`(正式網頁 0 個漏洞,只有開發工具的警告);六種語言母語者校對(README 的已知限制已寫明);清掃孤兒照片的 Edge Function;手機長按收回(維持點一下再按收回);「`?demo=1` 一個人也能展示的模擬模式」(使用者說不用)。
 
 ## 已完成
 - 需求、架構、視覺設計文件(`requirements.md`、`architecture.md`、`design.md`)
