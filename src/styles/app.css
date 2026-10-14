@@ -78,6 +78,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 .empty-state strong { color: var(--text); }
 
 /* ── 整體版面 ── */
+/* 只是為了能整塊設成 inert,不影響版面 */
+.app-root { display: contents; }
 .app { height: var(--vvh, 100dvh); display: flex; flex-direction: column; background: var(--bg); }
 .topbar {
   height: 60px; flex: none; display: flex; align-items: center; justify-content: space-between;

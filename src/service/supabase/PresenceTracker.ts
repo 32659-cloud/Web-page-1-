@@ -125,8 +125,10 @@ export class PresenceTracker {
     if (t !== undefined) this.timers.clear(t);
     this.pending.delete(userId);
     this.live.delete(userId);
-    this.beats.delete(userId);
-    this.stale.delete(userId);
+    // 「我離開了」的廣播,可能比 Presence 的消失通知早到。這時 Presence 裡還留著他離開前的舊資料,
+    // 不能因此又把他加回來:記下他最後的心跳編號,舊資料(編號相同)會被忽略,真的重新進來(新編號)才算。
+    const last = this.beats.get(userId);
+    if (last) this.stale.set(userId, last.value);
     const user = this.shown.get(userId);
     if (!user) return;
     this.shown.delete(userId);

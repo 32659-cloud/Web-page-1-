@@ -30,6 +30,7 @@ import {
   splitImagePath,
 } from './mapping';
 import { type LiveUser, PresenceTracker } from './PresenceTracker';
+import { parseConversationRow, parseImage, parseInvitationRow, parseList, parseMessageRow } from './validate';
 
 /** 每個人多久更新一次自己的在線心跳,以及多久檢查一次別人的心跳有沒有中斷 */
 const PRESENCE_BEAT_MS = 10_000;
@@ -362,8 +363,8 @@ export class SupabaseChatService implements ChatService {
     ]);
     if (hist.error || convs.error || invs.error) throw new ChatError('UNKNOWN');
 
-    const histRows = (hist.data as MessageRow[]).slice().reverse();
-    const convRows = convs.data as ConversationRow[];
+    const histRows = parseList(hist.data, parseMessageRow).reverse();
+    const convRows = parseList(convs.data, parseConversationRow);
     this.convs = new Map(convRows.map((c) => [c.id, c]));
 
     let privRows: MessageRow[] = [];
@@ -374,13 +375,13 @@ export class SupabaseChatService implements ChatService {
         .in('conversation_id', convRows.map((c) => c.id))
         .order('created_at', { ascending: true });
       if (pm.error) throw new ChatError('UNKNOWN');
-      privRows = pm.data as MessageRow[];
+      privRows = parseList(pm.data, parseMessageRow);
     }
 
     const all = [...histRows, ...privRows].map((m) => m.created_at).sort();
     this.lastMessageAt = all.length > 0 ? all[all.length - 1] : nowIso;
 
-    const invRows = invs.data as InvitationRow[];
+    const invRows = parseList(invs.data, parseInvitationRow);
     for (const row of invRows) this.trackInvite(rowToInvitation(row));
 
     return {
@@ -401,7 +402,8 @@ export class SupabaseChatService implements ChatService {
       const row = c.new as unknown;
       switch (table) {
         case 'public_messages': {
-          const r = row as MessageRow;
+          const r = parseMessageRow(row);
+          if (!r) break;
           if (c.eventType === 'INSERT') {
             this.seen(r.created_at);
             this.dispatch('message.received', { message: rowToMessage(r, 'public') });
@@ -411,7 +413,8 @@ export class SupabaseChatService implements ChatService {
           break;
         }
         case 'private_messages': {
-          const r = row as MessageRow;
+          const r = parseMessageRow(row);
+          if (!r) break;
           if (c.eventType === 'INSERT') {
             this.seen(r.created_at);
             this.dispatch('message.received', { message: rowToMessage(r, 'private') });
@@ -425,7 +428,8 @@ export class SupabaseChatService implements ChatService {
           break;
         }
         case 'invitations': {
-          const r = row as InvitationRow;
+          const r = parseInvitationRow(row);
+          if (!r) break;
           if (c.eventType === 'INSERT' && r.status === 'pending') {
             const inv = rowToInvitation(r);
             const known = this.pending.has(inv.id);
@@ -437,7 +441,8 @@ export class SupabaseChatService implements ChatService {
           break;
         }
         case 'conversations': {
-          const r = row as ConversationRow;
+          const r = parseConversationRow(row);
+          if (!r) break;
           if (c.eventType === 'INSERT' && r.status === 'active') {
             if (this.convs.has(r.id)) break;
             this.convs.set(r.id, r);
@@ -508,7 +513,7 @@ export class SupabaseChatService implements ChatService {
         .from('public_messages').select('*').gt('created_at', since).order('created_at', { ascending: true });
       const convs = await this.client.from('conversations').select('*').eq('status', 'active');
       if (pub.error || convs.error) return;
-      const active = convs.data as ConversationRow[];
+      const active = parseList(convs.data, parseConversationRow);
 
       // 新的、已經結束的私聊
       const activeIds = new Set(active.map((c) => c.id));
@@ -522,7 +527,7 @@ export class SupabaseChatService implements ChatService {
       const gone = [...this.convs.keys()].filter((id) => !activeIds.has(id));
       if (gone.length > 0) {
         const ended = await this.client.from('conversations').select('*').in('id', gone);
-        const byId = new Map(((ended.data ?? []) as ConversationRow[]).map((c) => [c.id, c]));
+        const byId = new Map(parseList(ended.data, parseConversationRow).map((c) => [c.id, c]));
         for (const id of gone) {
           const row = byId.get(id);
           this.convs.delete(id);
@@ -533,7 +538,7 @@ export class SupabaseChatService implements ChatService {
         }
       }
 
-      for (const m of pub.data as MessageRow[]) {
+      for (const m of parseList(pub.data, parseMessageRow)) {
         this.seen(m.created_at);
         this.dispatch('message.received', { message: rowToMessage(m, 'public') });
       }
@@ -541,7 +546,7 @@ export class SupabaseChatService implements ChatService {
         const pm = await this.client
           .from('private_messages').select('*').in('conversation_id', [...activeIds])
           .gt('created_at', since).order('created_at', { ascending: true });
-        for (const m of (pm.data ?? []) as MessageRow[]) {
+        for (const m of parseList(pm.data, parseMessageRow)) {
           this.seen(m.created_at);
           this.dispatch('message.received', { message: rowToMessage(m, 'private') });
         }
@@ -549,7 +554,7 @@ export class SupabaseChatService implements ChatService {
 
       const invs = await this.client
         .from('invitations').select('*').eq('status', 'pending').gt('expires_at', new Date().toISOString());
-      for (const r of (invs.data ?? []) as InvitationRow[]) {
+      for (const r of parseList(invs.data, parseInvitationRow)) {
         const inv = rowToInvitation(r);
         const known = this.pending.has(inv.id);
         this.trackInvite(inv);
@@ -627,7 +632,7 @@ export class SupabaseChatService implements ChatService {
     const { data, error } = await this.client.rpc('recall', { p_scope: p.scope, p_message: p.messageId });
     if (error) throw fromRpcError(error);
     // 資料庫已經把內容清掉了;把自己上傳的照片檔也刪掉
-    const image = data as ImageRef | null;
+    const image = parseImage(data);
     if (image) void this.removeFiles([image.thumbPath, image.fullPath]);
   }
 
@@ -635,7 +640,9 @@ export class SupabaseChatService implements ChatService {
     this.guard();
     const { data, error } = await this.client.rpc('invite', { p_to: p.toUserId });
     if (error) throw fromRpcError(error);
-    const inv = rowToInvitation(data as InvitationRow);
+    const invRow = parseInvitationRow(data);
+    if (!invRow) throw new ChatError('UNKNOWN');
+    const inv = rowToInvitation(invRow);
     this.trackInvite(inv);
     return inv;
   }
@@ -649,7 +656,8 @@ export class SupabaseChatService implements ChatService {
     });
     if (error) throw fromRpcError(error);
     if (!data) return null;
-    const row = data as ConversationRow;
+    const row = parseConversationRow(data);
+    if (!row) throw new ChatError('UNKNOWN');
     // 畫面接著就要切到這個私聊,所以先在這裡通知「私聊開始了」,不等即時事件
     this.convs.set(row.id, row);
     const conversation = rowToConversation(row, this.uid, (id) => this.tracker.isOnline(id));

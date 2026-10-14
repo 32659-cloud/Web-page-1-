@@ -118,8 +118,11 @@ export function App() {
 
   return (
     <>
-      {phase === 'entry' ? <EntryScreen /> : desktop ? <DesktopLayout /> : <MobileLayout />}
-      {phase === 'chat' && <InviteCards />}
+      {/* 離開確認視窗開著的時候,背景不能操作,輔助技術(和自動化工具)也只會看到視窗裡的按鈕 */}
+      <div className="app-root" {...(leaveOpen ? ({ inert: '' } as Record<string, string>) : {})}>
+        {phase === 'entry' ? <EntryScreen /> : desktop ? <DesktopLayout /> : <MobileLayout />}
+        {phase === 'chat' && <InviteCards />}
+      </div>
       {leaveOpen && (
         <ConfirmDialog
           icon="logout"

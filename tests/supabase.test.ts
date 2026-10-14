@@ -10,6 +10,7 @@ import {
   rowToMessage,
   splitImagePath,
 } from '../src/service/supabase/mapping';
+import { parseConversationRow, parseImage, parseInvitationRow, parseList, parseMessageRow } from '../src/service/supabase/validate';
 import type { User } from '../src/protocol/types';
 
 const user = (id: string, nickname = id): User => ({ userId: id, nickname, lang: 'zh-TW' });
@@ -241,3 +242,84 @@ describe('網路悄悄中斷(心跳)', () => {
     expect(log).toEqual(['synced:me']);
   });
 });
+
+describe('收到的資料先檢查才顯示', () => {
+  const id = '11111111-1111-4111-8111-111111111111';
+  const good = { id, sender_id: id, sender_nick: 'A', body: 'hi', image: null, recalled: false, created_at: '2026-10-14T00:00:00Z' };
+
+  it('正常的訊息通過', () => {
+    expect(parseMessageRow(good)?.body).toBe('hi');
+    expect(parseMessageRow({ ...good, recalled: true, body: null })?.recalled).toBe(true);
+  });
+  it('HTML 字串是合法的文字(畫面當純文字顯示),但格式錯的欄位會被丟掉', () => {
+    expect(parseMessageRow({ ...good, body: '<img src=x onerror=alert(1)>' })?.body).toContain('<img');
+    expect(parseMessageRow({ ...good, id: 'not-a-uuid' })).toBeNull();
+    expect(parseMessageRow({ ...good, sender_nick: 'x'.repeat(41) })).toBeNull();
+    expect(parseMessageRow({ ...good, body: 'x'.repeat(1001) })).toBeNull();
+    expect(parseMessageRow({ ...good, recalled: 'no' })).toBeNull();
+    expect(parseMessageRow({ ...good, created_at: 'yesterday-ish' })).toBeNull();
+    expect(parseMessageRow(null)).toBeNull();
+    expect(parseMessageRow('hello')).toBeNull();
+  });
+  it('照片路徑一定要在兩個桶子裡,不能有 ..', () => {
+    const ok = { thumbPath: 'chat-public/u/a_thumb.webp', fullPath: 'chat-public/u/a.webp', width: 10, height: 10 };
+    expect(parseImage(ok)).toEqual(ok);
+    expect(parseImage({ ...ok, fullPath: 'https://evil.example/x.png' })).toBeNull();
+    expect(parseImage({ ...ok, fullPath: 'chat-public/../secret' })).toBeNull();
+    expect(parseImage({ ...ok, width: 0 })).toBeNull();
+    expect(parseImage({ ...ok, width: 1.5 })).toBeNull();
+    expect(parseMessageRow({ ...good, image: { ...ok, thumbPath: 'javascript:alert(1)' } })).toBeNull();
+  });
+  it('邀請與私聊', () => {
+    const inv = { id, from_id: id, to_id: id, from_nick: 'A', to_nick: 'B', status: 'pending', created_at: '2026-10-14T00:00:00Z', expires_at: '2026-10-14T00:01:00Z' };
+    expect(parseInvitationRow(inv)?.status).toBe('pending');
+    expect(parseInvitationRow({ ...inv, status: 'hacked' })).toBeNull();
+    const conv = { id, user_a: id, user_b: id, nick_a: 'A', nick_b: 'B', started_at: '2026-10-14T00:00:00Z', status: 'active', ended_by: null, end_reason: null };
+    expect(parseConversationRow(conv)?.status).toBe('active');
+    expect(parseConversationRow({ ...conv, end_reason: 'because' })).toBeNull();
+    expect(parseConversationRow({ ...conv, status: 'weird' })).toBeNull();
+  });
+  it('一整串資料裡,壞掉的那幾筆被丟掉,其餘照常', () => {
+    expect(parseList([good, { nope: 1 }, { ...good, id: 'bad' }], parseMessageRow)).toHaveLength(1);
+    expect(parseList('not a list', parseMessageRow)).toEqual([]);
+  });
+});
+
+describe('主動離開的通知比 Presence 的消失通知早到', () => {
+  function setup() {
+    const log: string[] = [];
+    let clock = 0;
+    const tracker = new PresenceTracker(
+      () => 'me',
+      15_000,
+      {
+        synced: (us) => log.push('synced:' + us.map((u) => u.userId).join(',')),
+        joined: (u) => log.push('joined:' + u.userId),
+        left: (u) => log.push('left:' + u.userId),
+      },
+      { set: () => ({}), clear: () => undefined },
+      28_000,
+      () => clock,
+    );
+    const beat = (id: string, n: number) => ({ ...user(id), beat: n });
+    return { tracker, log, at: (ms: number) => (clock = ms), beat };
+  }
+
+  it('離開後,Presence 裡的舊資料不會讓他又出現', () => {
+    const { tracker, log, beat } = setup();
+    tracker.update([beat('me', 1), beat('a', 7)]);
+    tracker.remove('a'); // 收到「a 離開了」的廣播
+    tracker.update([beat('me', 2), beat('a', 7)]); // 別人的心跳觸發同步,Presence 裡還留著 a 的舊資料
+    expect(log).toEqual(['synced:me,a', 'left:a']);
+    expect(tracker.isOnline('a')).toBe(false);
+  });
+
+  it('同一個人真的重新進來(新的心跳編號)就會回來', () => {
+    const { tracker, log, beat } = setup();
+    tracker.update([beat('me', 1), beat('a', 7)]);
+    tracker.remove('a');
+    tracker.update([beat('me', 2), beat('a', 99)]);
+    expect(log).toEqual(['synced:me,a', 'left:a', 'joined:a']);
+  });
+});
+
