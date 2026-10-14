@@ -30,9 +30,10 @@ jobs:
       - run: npm test
       - run: npm run build
         env:
-          # 階段一:用模擬通訊層。階段二改成 supabase,並在 repo 的
-          # Settings → Secrets and variables → Actions → Variables 設定 VITE_SUPABASE_URL 與 VITE_SUPABASE_PUBLISHABLE_KEY
-          VITE_BACKEND: mock
+          # 階段二:接真實的 Supabase。網址與 Publishable key(可公開)放在 repo 的
+          # Settings → Secrets and variables → Actions → Variables:VITE_SUPABASE_URL、VITE_SUPABASE_PUBLISHABLE_KEY
+          # 要退回模擬版:把下一行改成 mock
+          VITE_BACKEND: supabase
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
       - uses: actions/configure-pages@v5

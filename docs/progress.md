@@ -1,7 +1,7 @@
 # 進度與待辦
 
 最後更新:2026-10-14(下午)
-目前階段:**階段二(接上 Supabase):資料庫與通訊層已完成並在真實專案上驗證通過;正式網址仍是模擬版(`deploy.yml` 的 `VITE_BACKEND` 還是 `mock`),等手機實測後再切換**
+目前階段:**階段二(接上 Supabase):資料庫與通訊層已完成並在真實專案上驗證通過;正式網址已切換成真實後端(`deploy.yml` 的 `VITE_BACKEND: supabase`),等手機實測回報**
 
 ## 已完成
 - 需求、架構、視覺設計文件(`requirements.md`、`architecture.md`、`design.md`)
@@ -34,9 +34,9 @@
 ## 階段二(進行中)
 待辦:
 1. 你用兩台裝置(電腦加手機)實測,回報問題。
-2. 實測沒問題後,把 `.github/workflows/deploy.yml` 的 `VITE_BACKEND: mock` 改成 `supabase`(兩個 Variables 已設好)再部署。
+2. (已完成 2026-10-14)`deploy.yml` 已切成 `supabase`。
 3. 第一版不做:清掃孤兒照片檔的 Edge Function(見 architecture.md 4.2)。
-4. 測試殘留:公開聊天室有測試訊息,可在 SQL Editor 執行 `delete from public.public_messages;` 清掉。
+4. (已完成)測試訊息已清掉。
 
 5. 文件與程式的一致性檢查(2026-10-14)已做完並修正,結果見 git 紀錄。
 
