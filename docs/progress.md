@@ -1,6 +1,6 @@
 # 進度與待辦
 
-最後更新:2026-10-14
+最後更新:2026-10-14(下午)
 目前階段:**階段一(前端加模擬通訊層),程式已寫好,還沒完成驗證**
 
 ## 已完成
@@ -9,6 +9,7 @@
 - 模擬通訊層 `MockChatService`(規則在 `src/service/mock/core.ts`,機器人在 `bots.ts`)
 - 六種語言的介面文字、淺色與深色模式、電腦版三欄與手機版分頁
 - 自動測試 28 個(`npm test`),`npm run build` 通過
+- 顏文字/表情符號面板(`EmojiPanel`);手機版輸入框 16px 修正 iOS 自動放大,`visualViewport` 處理鍵盤
 - 部署設定:`vite.config.ts` 的 `base` 自動帶入 repo 名稱,`.github/workflows/deploy.yml`
 
 ## 怎麼在本機看
@@ -18,7 +19,7 @@
 
 ## 待辦(依建議順序)
 1. **在瀏覽器逐項檢查畫面,和 `design.md` 比對**:手機版、深色模式、進入畫面、照片放大、照片上傳與壓縮。目前只實際看過電腦版公開聊天室與私聊。
-2. **GitHub 網頁設定**:repo 的 Settings → Pages → Source 選「GitHub Actions」,之後重新執行失敗的 Action,確認正式網址能打開;再用手機實際開一次。
+2. ~~GitHub 網頁設定~~ 已完成:Pages 用 GitHub Actions 部署成功,正式網址 https://32659-cloud.github.io/Web-page-1-/ 能打開,手機實測沒問題(2026-10-14)。
 3. **更新架構文件 5.2**:實作上指令失敗是丟出帶錯誤代碼的錯誤(`ChatError`),沒有發出 `command.rejected` 事件。
 4. **升級 `vite`、`vitest`**,清掉 `npm audit` 的開發工具安全警告(發布出去的網頁是 0 個漏洞),升級後重跑 `npm test` 與 `npm run build`。
 5. **架構文件 13.1 的驗證清單全部通過**,才進階段二。可補 `tests/e2e`(Playwright 已裝成開發套件)與 `tests/contract`。

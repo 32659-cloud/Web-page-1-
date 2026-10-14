@@ -372,7 +372,7 @@ export function janitor(db: Db, ctx: Ctx): void {
     }
   }
 
-  // 邀請 10 分鐘沒回應:自動拒絕(逾時,不算被拒絕,沒有冷卻)
+  // 邀請 60 秒沒回應:自動拒絕(逾時,不算被拒絕,沒有冷卻)
   for (const inv of db.invitations) {
     if (inv.status === 'pending' && now >= inv.expiresAt) {
       inv.status = 'expired';

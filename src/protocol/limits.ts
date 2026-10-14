@@ -46,7 +46,7 @@ export const LIMITS: Limits = {
   imageMaxBytes: 2 * 1024 * 1024,
   invitePerTarget: 2,
   inviteWindowMs: MIN,
-  inviteExpiryMs: 10 * MIN,
+  inviteExpiryMs: 60 * SEC,
   declineCooldownMs: 30 * MIN,
   offlineAnnounceMs: 15 * SEC,
   privateOfflineMs: 30 * MIN,

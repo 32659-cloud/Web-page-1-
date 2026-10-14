@@ -138,15 +138,15 @@ describe('私聊邀請', () => {
     expect(code(() => core.invite(db, ctx, 'a', 'b'))).toBeNull();
   });
 
-  it('10 分鐘沒回應:自動結束(逾時),不算被拒絕,可以馬上再邀請', () => {
+  it('60 秒沒回應:自動結束(逾時),不算被拒絕,可以馬上再邀請', () => {
     const { db, ctx } = two();
     core.invite(db, ctx, 'a', 'b');
     const stay = () => ['a', 'b'].forEach((u) => core.heartbeat(db, ctx, u));
-    ctx.now += 9 * MIN;
+    ctx.now += 50 * 1000;
     stay();
     core.janitor(db, ctx);
     expect(db.invitations[0].status).toBe('pending');
-    ctx.now += 2 * MIN;
+    ctx.now += 20 * 1000;
     stay();
     core.janitor(db, ctx);
     const updates = db.events.filter((e) => e.type === 'invite.updated');
