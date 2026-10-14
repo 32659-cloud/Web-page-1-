@@ -113,7 +113,7 @@
   "leaveDlg": {
     "title": "Quitter le salon ?",
     "body": "Si vous quittez, toutes vos discussions privées se terminent et votre pseudo est libéré. Confirmer ?",
-    "confirm": "Quitter"
+    "confirm": "Oui, quitter"
   },
   "recallDlg": {
     "title": "Retirer ce message ?",

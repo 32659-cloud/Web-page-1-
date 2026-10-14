@@ -572,11 +572,15 @@ export class SupabaseChatService implements ChatService {
     const folders = [...this.convs.keys()];
     const { error } = await this.client.rpc('leave');
     if (error) throw fromRpcError(error);
-    // 通知大家:我離開了(不用等 15 秒)
-    try {
-      await this.roomChannel?.send({ type: 'broadcast', event: 'left', payload: { userId: this.uid } });
-    } catch {
-      /* 沒送到也沒關係,15 秒後大家會看到 */
+    // 先退出 Presence(別人的名單開始 15 秒倒數),再廣播「我離開了」讓大家馬上移除。
+    // 兩步都設時間上限:就算網路卡住,也一定會往下收尾(關掉頻道,連線自然斷開,別人 15 秒後也會看到)。
+    const room = this.roomChannel;
+    if (room) {
+      const announce = (async () => {
+        await room.untrack();
+        await room.send({ type: 'broadcast', event: 'left', payload: { userId: this.uid } });
+      })().catch(() => undefined);
+      await Promise.race([announce, new Promise<void>((r) => window.setTimeout(r, 1500))]);
     }
     for (const id of folders) void this.removeOwnPrivateFiles(id);
     await this.teardown();

@@ -113,7 +113,7 @@
   "leaveDlg": {
     "title": "Leave the chat room?",
     "body": "If you leave, all your private chats end and your nickname is released for others. Are you sure?",
-    "confirm": "Leave"
+    "confirm": "Yes, leave"
   },
   "recallDlg": {
     "title": "Recall this message?",

@@ -113,7 +113,7 @@
   "leaveDlg": {
     "title": "¿Salir del chat?",
     "body": "Si sales, todos tus chats privados terminan y tu apodo queda libre para otros. ¿Seguro?",
-    "confirm": "Salir"
+    "confirm": "Sí, salir"
   },
   "recallDlg": {
     "title": "¿Retirar este mensaje?",
