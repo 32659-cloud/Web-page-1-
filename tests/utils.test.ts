@@ -49,3 +49,13 @@ describe('插入顏文字', () => {
     expect(insertAt('ab', 'X', 99, 99)).toEqual({ text: 'abX', cursor: 3 });
   });
 });
+
+describe('邀請倒數', () => {
+  it('算出剩餘秒數,最少 0,無條件進位', async () => {
+    const { secondsLeft } = await import('../src/utils/countdown');
+    expect(secondsLeft(60_000, 0)).toBe(60);
+    expect(secondsLeft(60_000, 59_500)).toBe(1);
+    expect(secondsLeft(60_000, 70_000)).toBe(0);
+    expect(secondsLeft(new Date(30_000).toISOString(), 0)).toBe(30);
+  });
+});

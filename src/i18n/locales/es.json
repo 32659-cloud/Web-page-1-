@@ -96,7 +96,8 @@
     "declined": "{{name}} rechazó tu invitación · podrás invitar de nuevo en 30 minutos",
     "busy": "{{name}} está ocupado ahora · inténtalo más tarde",
     "accepted": "{{name}} aceptó tu invitación",
-    "cancelledByPeer": "{{name}} canceló la invitación"
+    "cancelledByPeer": "{{name}} canceló la invitación",
+    "timeLeft": "Caduca en {{time}}"
   },
   "photo": {
     "processing": "Comprimiendo la foto…",

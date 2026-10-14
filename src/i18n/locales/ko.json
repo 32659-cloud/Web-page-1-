@@ -96,7 +96,8 @@
     "declined": "{{name}} 님이 초대를 거절했어요 · 30분 후에 다시 초대할 수 있어요",
     "busy": "{{name}} 님은 지금 바빠요 · 나중에 다시 초대해 보세요",
     "accepted": "{{name}} 님이 초대를 수락했어요",
-    "cancelledByPeer": "{{name}} 님이 초대를 취소했어요"
+    "cancelledByPeer": "{{name}} 님이 초대를 취소했어요",
+    "timeLeft": "{{time}} 후 만료"
   },
   "photo": {
     "processing": "사진을 압축하는 중…",

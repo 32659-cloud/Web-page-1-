@@ -313,6 +313,8 @@ button.conv-row:hover { background: var(--surface2); }
 }
 .invite-who { display: flex; align-items: center; gap: 12px; }
 .invite-who > div { display: flex; flex-direction: column; }
+.invite-countdown { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.invite-countdown.urgent { color: var(--errText); font-weight: 700; }
 .invite-who strong { font-size: 16px; }
 .invite-actions { display: flex; gap: 10px; }
 .invite-actions .btn { flex: 1; height: 44px; border-radius: 12px; font-size: 15px; }

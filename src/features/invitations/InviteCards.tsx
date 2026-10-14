@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '../../components/Avatar';
 import { useChat } from '../../state/store';
+import { InviteCountdown } from './InviteCountdown';
 
 /** 收到邀請的卡片:不遮住整個畫面、不搶輸入框焦點;多個邀請時一次顯示一張。 */
 export function InviteCards() {
@@ -15,6 +16,7 @@ export function InviteCards() {
         <Avatar name={first.from.nickname} size={44} />
         <div>
           <strong>{t('invite.from', { name: first.from.nickname })}</strong>
+          <InviteCountdown expiresAt={first.expiresAt} />
           {list.length > 1 && <span className="muted-small">{t('invite.more', { count: list.length - 1 })}</span>}
         </div>
       </div>

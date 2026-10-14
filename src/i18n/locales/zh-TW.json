@@ -96,7 +96,8 @@
     "declined": "{{name}} 拒絕了你的邀請 · 30 分鐘後才能再邀請這個人",
     "busy": "{{name}} 目前正在忙 · 你可以稍後再邀請",
     "accepted": "{{name}} 接受了你的邀請",
-    "cancelledByPeer": "{{name}} 取消了邀請"
+    "cancelledByPeer": "{{name}} 取消了邀請",
+    "timeLeft": "{{time}} 後逾時"
   },
   "photo": {
     "processing": "正在壓縮照片…",

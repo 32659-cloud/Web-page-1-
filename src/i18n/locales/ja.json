@@ -96,7 +96,8 @@
     "declined": "{{name}}さんに断られました · 30分後に再招待できます",
     "busy": "{{name}}さんは今忙しいようです · 後でもう一度どうぞ",
     "accepted": "{{name}}さんが招待を承諾しました",
-    "cancelledByPeer": "{{name}}さんが招待を取り消しました"
+    "cancelledByPeer": "{{name}}さんが招待を取り消しました",
+    "timeLeft": "あと {{time}} で期限切れ"
   },
   "photo": {
     "processing": "写真を圧縮しています…",

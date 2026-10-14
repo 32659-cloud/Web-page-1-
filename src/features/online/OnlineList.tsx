@@ -4,17 +4,7 @@ import { Avatar } from '../../components/Avatar';
 import { Icon } from '../../components/Icon';
 import type { User } from '../../protocol/types';
 import { formatDuration, useChat } from '../../state/store';
-
-function useNow(intervalMs: number, active: boolean): number {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    if (!active) return;
-    setNow(Date.now());
-    const id = window.setInterval(() => setNow(Date.now()), intervalMs);
-    return () => window.clearInterval(id);
-  }, [active, intervalMs]);
-  return now;
-}
+import { useNow } from '../../utils/useNow';
 
 /** 點一個人之後的選單:邀請私聊 / 前往私聊 / 冷卻中 / 等待回應(電腦是小浮窗,手機是底部面板) */
 function UserMenu({ user, sheet, onClose }: { user: User; sheet: boolean; onClose: () => void }) {

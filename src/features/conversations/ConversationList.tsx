@@ -4,6 +4,7 @@ import { Icon } from '../../components/Icon';
 import { LIMITS } from '../../protocol/limits';
 import { type ConvState, useChat } from '../../state/store';
 import { formatTime } from '../../utils/time';
+import { InviteCountdown } from '../invitations/InviteCountdown';
 
 function previewOf(c: ConvState, t: (k: string) => string): string {
   if (c.ended) return t('convs.ended');
@@ -94,7 +95,9 @@ export function ConversationList({ showPublic }: { showPublic: boolean }) {
               <Avatar name={inv.to.nickname} size={38} />
               <span className="conv-main">
                 <strong>{inv.to.nickname}</strong>
-                <span className="conv-preview">{t('convs.pending')}</span>
+                <span className="conv-preview">
+                  {t('convs.pending')} <InviteCountdown expiresAt={inv.expiresAt} bare />
+                </span>
               </span>
               <button type="button" className="btn btn-ghost btn-sm" onClick={() => void cancelInvite(inv)}>
                 {t('convs.cancelInvite')}
