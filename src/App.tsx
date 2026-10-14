@@ -118,11 +118,8 @@ export function App() {
 
   return (
     <>
-      {/* 離開確認視窗開著的時候,背景不能操作,輔助技術(和自動化工具)也只會看到視窗裡的按鈕 */}
-      <div className="app-root" {...(leaveOpen ? ({ inert: '' } as Record<string, string>) : {})}>
-        {phase === 'entry' ? <EntryScreen /> : desktop ? <DesktopLayout /> : <MobileLayout />}
-        {phase === 'chat' && <InviteCards />}
-      </div>
+      {/* 離開確認視窗放在最前面(視覺上仍蓋在最上層),開著的時候背景不能操作、也從輔助技術裡隱藏:
+          讀畫面的工具(螢幕閱讀器、自動化測試)就只會看到視窗裡的按鈕,不會把背景同名的「離開」當成要按的那個 */}
       {leaveOpen && (
         <ConfirmDialog
           icon="logout"
@@ -136,6 +133,14 @@ export function App() {
           }}
         />
       )}
+      <div
+        className="app-root"
+        aria-hidden={leaveOpen ? 'true' : undefined}
+        {...(leaveOpen ? ({ inert: '' } as Record<string, string>) : {})}
+      >
+        {phase === 'entry' ? <EntryScreen /> : desktop ? <DesktopLayout /> : <MobileLayout />}
+        {phase === 'chat' && <InviteCards />}
+      </div>
       <Lightbox />
       <Toasts />
       <DevTools />
