@@ -159,3 +159,85 @@ describe('線上名單的進出判斷', () => {
     expect(log).toEqual(['synced:me,a', 'joined:a']);
   });
 });
+
+describe('網路悄悄中斷(心跳)', () => {
+  function setup() {
+    const log: string[] = [];
+    let clock = 0;
+    const tracker = new PresenceTracker(
+      () => 'me',
+      15_000,
+      {
+        synced: (us) => log.push('synced:' + us.map((u) => u.userId).join(',')),
+        joined: (u) => log.push('joined:' + u.userId),
+        left: (u) => log.push('left:' + u.userId),
+      },
+      { set: () => ({}), clear: () => undefined },
+      28_000,
+      () => clock,
+    );
+    const beat = (id: string, n: number) => ({ ...user(id), beat: n });
+    return { tracker, log, at: (ms: number) => (clock = ms), beat };
+  }
+
+  it('心跳一直更新,不會被當成離線', () => {
+    const { tracker, log, at, beat } = setup();
+    tracker.update([beat('me', 1), beat('a', 1)]);
+    for (let i = 1; i <= 10; i++) {
+      at(i * 10_000);
+      tracker.update([beat('me', i + 1), beat('a', i + 1)]);
+      tracker.tick();
+    }
+    expect(log).toEqual(['synced:me,a']);
+  });
+
+  it('心跳停了超過 28 秒,視為離線,即使 Presence 裡還在', () => {
+    const { tracker, log, at, beat } = setup();
+    tracker.update([beat('me', 1), beat('a', 1)]);
+    at(20_000);
+    tracker.update([beat('me', 2), beat('a', 1)]); // a 的心跳編號沒變
+    tracker.tick();
+    expect(log).toEqual(['synced:me,a']); // 還沒到 28 秒
+    at(29_000);
+    tracker.tick();
+    expect(log).toEqual(['synced:me,a', 'left:a']);
+    expect(tracker.isOnline('a')).toBe(false);
+  });
+
+  it('被移除之後,同一份舊資料不會讓他又出現', () => {
+    const { tracker, log, at, beat } = setup();
+    tracker.update([beat('me', 1), beat('a', 1)]);
+    at(30_000);
+    tracker.tick();
+    at(40_000);
+    tracker.update([beat('me', 4), beat('a', 1)]);
+    expect(log).toEqual(['synced:me,a', 'left:a']);
+  });
+
+  it('心跳恢復後,他會回來', () => {
+    const { tracker, log, at, beat } = setup();
+    tracker.update([beat('me', 1), beat('a', 1)]);
+    at(30_000);
+    tracker.tick();
+    at(35_000);
+    tracker.update([beat('me', 5), beat('a', 5)]);
+    expect(log).toEqual(['synced:me,a', 'left:a', 'joined:a']);
+    expect(tracker.isOnline('a')).toBe(true);
+  });
+
+  it('舊版沒有心跳資訊的人,不做逾時判斷', () => {
+    const { tracker, log, at } = setup();
+    tracker.update([user('me'), user('a')]);
+    at(120_000);
+    tracker.tick();
+    expect(log).toEqual(['synced:me,a']);
+  });
+
+  it('自己不會因為心跳而被移除', () => {
+    const { tracker, log, at, beat } = setup();
+    tracker.update([beat('me', 1)]);
+    at(120_000);
+    tracker.tick();
+    expect(log).toEqual(['synced:me']);
+  });
+});

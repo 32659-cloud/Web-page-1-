@@ -29,8 +29,11 @@ import {
   rowToMessage,
   splitImagePath,
 } from './mapping';
-import { PresenceTracker } from './PresenceTracker';
+import { type LiveUser, PresenceTracker } from './PresenceTracker';
 
+/** 每個人多久更新一次自己的在線心跳,以及多久檢查一次別人的心跳有沒有中斷 */
+const PRESENCE_BEAT_MS = 10_000;
+const PRESENCE_CHECK_MS = 3_000;
 const SNAPSHOT_TIMEOUT_MS = 10_000;
 const PRESENCE_WAIT_MS = 5_000;
 const SIGNED_URL_SEC = 3600;
@@ -40,7 +43,7 @@ const PRIVATE_BUCKET = 'chat-private';
 type Handler = (payload: never) => void;
 type Row = Record<string, unknown>;
 type DbChange = { eventType: 'INSERT' | 'UPDATE' | 'DELETE'; new: Row; old: Row };
-type PresenceMeta = { userId?: string; nickname?: string; lang?: string };
+type PresenceMeta = { userId?: string; nickname?: string; lang?: string; ts?: number };
 
 function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
   return new Promise<T>((resolve, reject) => {
@@ -75,6 +78,8 @@ export class SupabaseChatService implements ChatService {
   private everUp = false;
 
   private heartbeatTimer: number | null = null;
+  private presenceBeatTimer: number | null = null;
+  private presenceCheckTimer: number | null = null;
   /** 進入的快照還沒送完之前,先把即時事件排隊,送完再放出去(畫面會用編號去掉重複的) */
   private ready = false;
   private queue: (() => void)[] = [];
@@ -249,11 +254,16 @@ export class SupabaseChatService implements ChatService {
     }
 
     this.heartbeatTimer = window.setInterval(() => void this.beat(), LIMITS.heartbeatMs);
+    // 在線心跳:網路悄悄中斷時連線不會被關閉,別人只能靠「心跳停了」得知
+    this.presenceBeatTimer = window.setInterval(() => {
+      if (this.roomUp) void this.roomChannel?.track(this.presenceMeta());
+    }, PRESENCE_BEAT_MS);
+    this.presenceCheckTimer = window.setInterval(() => this.tracker.tick(), PRESENCE_CHECK_MS);
     this.updateStatus();
   }
 
   private presenceMeta(): PresenceMeta {
-    return { userId: this.uid, nickname: this.me?.nickname, lang: this.me?.lang };
+    return { userId: this.uid, nickname: this.me?.nickname, lang: this.me?.lang, ts: Date.now() };
   }
 
   private subscribe(channel: RealtimeChannel, onState: (up: boolean) => void): Promise<void> {
@@ -327,11 +337,16 @@ export class SupabaseChatService implements ChatService {
   private onPresenceSync(): void {
     if (!this.roomChannel) return;
     const state = this.roomChannel.presenceState<PresenceMeta>();
-    const users: User[] = [];
+    const users: LiveUser[] = [];
     for (const metas of Object.values(state)) {
       const m = metas[0];
       if (!m || typeof m.userId !== 'string' || typeof m.nickname !== 'string') continue;
-      users.push({ userId: m.userId, nickname: m.nickname.slice(0, 40), lang: (m.lang as Lang) ?? 'zh-TW' });
+      users.push({
+        userId: m.userId,
+        nickname: m.nickname.slice(0, 40),
+        lang: (m.lang as Lang) ?? 'zh-TW',
+        beat: typeof m.ts === 'number' ? m.ts : undefined,
+      });
     }
     this.tracker.update(users);
   }
@@ -548,6 +563,10 @@ export class SupabaseChatService implements ChatService {
   private async teardown(): Promise<void> {
     if (this.heartbeatTimer !== null) window.clearInterval(this.heartbeatTimer);
     this.heartbeatTimer = null;
+    if (this.presenceBeatTimer !== null) window.clearInterval(this.presenceBeatTimer);
+    if (this.presenceCheckTimer !== null) window.clearInterval(this.presenceCheckTimer);
+    this.presenceBeatTimer = null;
+    this.presenceCheckTimer = null;
     for (const p of this.pending.values()) window.clearTimeout(p.timer);
     this.pending.clear();
     this.convs.clear();
