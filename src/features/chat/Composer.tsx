@@ -81,8 +81,11 @@ export function Composer({ scope, conversationId, ended, onCloseWindow }: Props)
       const img = pending.image;
       try {
         setPending({ status: 'uploading', image: img, percent: 0 });
-        image = await getService().uploadImage(scope, img, (percent) =>
-          setPending({ status: 'uploading', image: img, percent }),
+        image = await getService().uploadImage(
+          scope,
+          img,
+          (percent) => setPending({ status: 'uploading', image: img, percent }),
+          conversationId,
         );
       } catch (e) {
         setPending({ status: 'ready', image: img });

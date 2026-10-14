@@ -39,11 +39,12 @@ export interface ChatService {
   setLang(p: CommandParams['profile.setLang']): Promise<void>;
 
   // ── 照片 ──
-  /** 上傳壓縮好的照片(縮圖與大圖),回傳可放進訊息的照片資料 */
+  /** 上傳壓縮好的照片(縮圖與大圖),回傳可放進訊息的照片資料。私聊照片要帶 conversationId */
   uploadImage(
     scope: 'public' | 'private',
     blobs: ImageBlobs,
     onProgress: (percent: number) => void,
+    conversationId?: string,
   ): Promise<ImageRef>;
   /** 取得照片的可顯示網址(階段二是有時效的簽名網址) */
   getImageUrl(path: string): Promise<string>;

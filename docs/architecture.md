@@ -160,7 +160,7 @@ flowchart LR
 **會改變什麼**
 1. 新增 `SupabaseChatService`,實作和模擬層**完全相同的介面**(同樣的指令、同樣的事件,見第 5 節)。
 2. 一個設定值決定用哪一個:`VITE_BACKEND=mock` 或 `VITE_BACKEND=supabase`。
-3. 在 Supabase 建立資料表、規則、函式、Storage 桶子和定時工作(程式碼放在 `supabase/migrations/`,每一份都是可重複執行的檔案,見第 11 節)。
+3. 在 Supabase 建立資料表、規則、函式、Storage 桶子和定時工作(程式碼放在 `supabase/migrations/`,共三份,每一份都是可重複執行的檔案,見第 11 節)。**不使用 Supabase CLI**:三份檔案由你在網頁的 SQL Editor 依序貼上執行(見 12.4)。
 4. 建立金鑰並設定到 GitHub(見第 8 節)。
 5. 模擬層保留,繼續用在開發和自動測試。
 
@@ -168,7 +168,7 @@ flowchart LR
 
 | 表 | 存什麼 | 誰能讀 |
 |---|---|---|
-| `profiles` | 每個人的代號、語言、最後心跳時間(`last_seen`)。代號用「不分大小寫」的唯一限制 | 所有登入者(只讀代號和語言) |
+| `profiles` | 每個人的代號、語言、最後心跳時間(`last_seen`)。代號用「不分大小寫」的唯一限制 | **沒人能直接讀**(線上名單改由 Presence 提供,只有資料庫函式看得到這張表) |
 | `public_messages` | 公開訊息:誰、內容、照片路徑、是否收回、時間。永遠只保留最新 100 筆 | 所有登入者 |
 | `invitations` | 邀請:誰邀請誰、狀態(等待中、接受、拒絕、逾時、取消)、時間 | 只有邀請者和被邀請者 |
 | `conversations` | 私聊:兩位參與者、狀態、開始與結束時間 | 只有兩位參與者 |
@@ -193,10 +193,12 @@ flowchart LR
 | `end_conversation(conversation)` | 結束私聊 | 必須是參與者 |
 
 **定時工作(每分鐘執行)**
-- 超過 60 秒沒回應的邀請,標記為「逾時」(邀請者看到「對方目前正在忙」)。注意:這個工作每分鐘才跑一次,實際會在 60~120 秒之間才逾時;畫面可依邀請的 `expiresAt` 自己倒數,或改用更頻繁的排程,階段二再決定。
+- 超過 60 秒沒回應的邀請,標記為「逾時」(邀請者看到「對方目前正在忙」)。
 - 最後心跳超過 2 分鐘、而且沒有私聊的人,刪除他的代號登記(**我的決定**:需求只規定「私聊中離線保留 30 分鐘」,沒私聊的人保留 2 分鐘,讓不小心關掉分頁的人能馬上回來)。
 - 有私聊的人最後心跳超過 30 分鐘,結束他所有私聊並刪除代號登記。
-- 公開訊息只保留最新 100 則;已收回或已過期私聊的照片檔,由 Edge Function 負責從 Storage 刪除(為什麼這件事要用 Edge Function:見 9.2)。
+- 公開訊息只保留最新 100 則(每次送訊息時順便清);已結束的私聊 10 分鐘後刪掉;過期的邀請、冷卻、防洗版紀錄也在這裡清。
+- **照片檔的清掃(Edge Function)第一版不做**:收回、結束私聊、離開時,由使用者的瀏覽器刪掉自己上傳的檔案。「直接關網頁、來不及刪」的檔案、以及超過 100 則被擠掉的公開照片,會留在儲存空間,量很小,之後需要再補(見 9.2)。
+- **邀請逾時的精度**:逾時由兩處保證:資料庫在有人邀請或回應時會檢查 `expires_at`(過期就視為逾時),每分鐘巡邏再補標記;畫面依邀請的 `expiresAt` 自己倒數,到時間就收掉卡片,所以實際體驗是準 60 秒。
 
 ### 4.3 兩個階段之間怎麼不重寫
 
@@ -258,7 +260,7 @@ flowchart TB
 | `conversation.started` | 私聊建立 |
 | `conversation.ended` | 私聊結束,帶著原因(`endedByMe`、`endedByPeer`、`peerLeft`、`peerTimeout`) |
 | `conversation.peerStatus` | 私聊對方上線或離線(畫面顯示「對方離線中」) |
-| `command.rejected` | 某個指令被拒絕,帶著錯誤代碼(見 5.4) |
+| `command.rejected` | (**實作時沒有採用**)指令失敗改為丟出帶錯誤代碼的 `ChatError`,畫面接住後依代碼顯示提示。模擬層與 Supabase 層行為一致 |
 
 ### 5.3 資料格式
 
@@ -575,7 +577,7 @@ sequenceDiagram
 | **Publishable key**(舊名 `anon key`) | 前端用來連 Supabase 的鑰匙,權限很小,只能做「資料庫規則允許的事」 | **可以公開**。它會被包進網頁檔案裡,任何人打開網頁都看得到,這是正常的設計。真正保護資料的是第 9 節的 RLS 規則,不是藏這把鑰匙 | 前端設定 |
 | **Secret key**(舊名 `service_role key`) | 管理員鑰匙,**可以無視所有 RLS 規則**讀寫全部資料 | **絕對不能公開**。外流等於整個資料庫被攤開 | 只存在 Supabase 的 Edge Function 環境(Supabase 會自動提供給 Edge Function,**不需要貼進任何檔案**) |
 | **資料庫密碼** | 建立專案時設定的密碼 | **絕對不能公開** | 只存在你的密碼管理工具 |
-| **Access token** | 讓電腦上的指令工具(Supabase CLI)登入你的帳號 | **絕對不能公開** | 你自己的電腦,不進 repo |
+| **Access token** | 讓電腦上的指令工具(Supabase CLI)登入你的帳號 | **絕對不能公開** | 這個專案不使用 CLI,用不到;如果以後用,放在你自己的電腦,不進 repo |
 | **驗證碼的 Site key / Secret key**(選用,見 9.1) | Cloudflare Turnstile 的一組公開鑰匙加一組祕密鑰匙 | Site key 可公開;Secret key 不行 | Site key 在前端設定;Secret key 貼在 Supabase 後台的設定頁 |
 
 ### 8.2 怎麼產生
@@ -633,6 +635,7 @@ VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_…
 
 ### 9.2 照片的存取控制
 - **公開聊天的照片桶**:設為公開讀取。網址包含隨機編號,猜不到。但「知道網址就看得到」,所以只放公開聊天的照片。
+- **路徑約定**:公開桶 `chat-public/<我的 userId>/<檔名>`;私聊桶 `chat-private/<私聊 id>/<我的 userId>/<檔名>`。`ImageRef` 裡的路徑第一段是桶子名稱。資料庫函式會檢查訊息帶的照片路徑必須是「自己的資料夾」,不能引用別人的照片。
 - **私聊照片桶**:設為私有。畫面要顯示照片時,向後端要一個**簽名網址**(帶有時效、約 1 小時失效的臨時網址),並且 Storage 的規則會檢查「你是不是這個私聊的參與者」。私聊結束後,照片也會刪除。
 - **為什麼刪除照片要用 Edge Function**:在資料庫裡直接刪除檔案的紀錄,不會真的刪掉儲存空間裡的檔案,只能透過 Storage 的正式介面刪除。所以:
   - 使用者主動收回或結束私聊時,由他的瀏覽器呼叫 Storage 刪除自己的檔案。
@@ -721,10 +724,9 @@ Web-page-1-/
 │  │  └─ tokens.css           顏色等設計變數 (淺色與深色兩組)
 │  └─ utils/                  代號整理 圖片壓縮 時間格式 等小工具
 ├─ supabase/                  階段二的後端設定
-│  ├─ migrations/             資料表 規則 函式 定時工作 (一份份可重複執行的檔案)
+│  ├─ migrations/             001_schema 002_storage 003_cron (在 SQL Editor 依序貼上執行)
 │  ├─ functions/
-│  │  └─ cleanup/             每分鐘清理用的 Edge Function
-│  └─ config.toml
+│  │  └─ cleanup/             (第一版不做)清掃孤兒照片檔的 Edge Function
 ├─ tests/
 │  ├─ unit/                   小邏輯測試
 │  ├─ contract/               契約測試 (模擬層與 Supabase 層共用)
@@ -762,7 +764,14 @@ Web-page-1-/
 - 因為沒有網址路由(見 3.1),重新整理不會出現「找不到頁面」。
 
 ### 12.4 部署 Supabase 那一邊(階段二)
-GitHub Pages 只放前端。Supabase 的資料表、規則和 Edge Function 另外用 **Supabase CLI**(Supabase 提供的指令工具)從 `supabase/` 資料夾推上去。這一步由你在自己的電腦做,會用到 Access token(見 8.1,**不要放進 repo 或 GitHub**)。
+GitHub Pages 只放前端。Supabase 的資料表、規則、函式、桶子和定時工作,**不用 CLI、不需要 Access token**:到 Supabase 網頁的 **SQL Editor**,依序貼上 `supabase/migrations/` 的三份檔案,各按一次 Run:
+1. `001_schema.sql`:資料表、存取規則、資料庫函式、即時推送。
+2. `002_storage.sql`:兩個照片桶子與存取規則。
+3. `003_cron.sql`:每分鐘巡邏(如果 pg_cron 出錯,先到 Integrations → Cron 啟用再重跑)。
+
+三份都可以重複執行。網頁會對含 `drop policy` 的檔案顯示「Potential issue detected」,確認後按 Run query 即可。
+
+另外要在 Authentication → Sign In / Providers 打開 **Allow anonymous sign-ins**(見 8.2)。
 
 ---
 
