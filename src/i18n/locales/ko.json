@@ -1,6 +1,12 @@
 {
-  "app": { "name": "익명 채팅" },
-  "common": { "cancel": "취소", "close": "닫기", "retry": "다시 시도" },
+  "app": {
+    "name": "익명 채팅"
+  },
+  "common": {
+    "cancel": "취소",
+    "close": "닫기",
+    "retry": "다시 시도"
+  },
   "entry": {
     "tagline": "가입도 로그인도 필요 없어요. 닉네임만 정하고 바로 채팅하세요.",
     "nicknameLabel": "닉네임",
@@ -9,8 +15,17 @@
     "langLabel": "언어",
     "enter": "채팅방 입장"
   },
-  "conn": { "connected": "연결됨", "reconnecting": "다시 연결 중…", "offline": "오프라인" },
-  "top": { "theme": "다크/라이트 모드 전환", "language": "언어", "leave": "나가기", "menu": "메뉴" },
+  "conn": {
+    "connected": "연결됨",
+    "reconnecting": "다시 연결 중…",
+    "offline": "오프라인"
+  },
+  "top": {
+    "theme": "다크/라이트 모드 전환",
+    "language": "언어",
+    "leave": "나가기",
+    "menu": "메뉴"
+  },
   "online": {
     "title": "접속 중",
     "count": "{{count}}명",
@@ -55,7 +70,10 @@
     "inputDisabledHint": "입력창이 비활성화되었어요. ‘닫기’를 눌러 이 창을 지우세요.",
     "back": "1:1 대화 목록으로",
     "loading": "불러오는 중…",
-    "enlarge": "눌러서 사진 확대"
+    "enlarge": "눌러서 사진 확대",
+    "emojiPanel": "이모티콘과 이모지",
+    "tabKaomoji": "이모티콘",
+    "tabEmoji": "이모지"
   },
   "system": {
     "joined": "{{name}} 님이 들어왔어요",
@@ -106,9 +124,17 @@
     "body": "이 대화의 메시지와 사진이 모두 삭제돼요.",
     "confirm": "대화 종료"
   },
-  "tabs": { "public": "공개", "private": "1:1", "online": "접속 중" },
-  "title": { "newInvite": "({{count}}) 새 초대" },
-  "notice": { "sessionExpired": "오프라인 시간이 너무 길어 닉네임이 해제되었어요. 다시 입장해 주세요." },
+  "tabs": {
+    "public": "공개",
+    "private": "1:1",
+    "online": "접속 중"
+  },
+  "title": {
+    "newInvite": "({{count}}) 새 초대"
+  },
+  "notice": {
+    "sessionExpired": "오프라인 시간이 너무 길어 닉네임이 해제되었어요. 다시 입장해 주세요."
+  },
   "errors": {
     "NICKNAME_INVALID": "닉네임은 1~20자여야 해요",
     "NICKNAME_TAKEN": "이미 사용 중인 닉네임이에요. 다른 닉네임을 골라 주세요",

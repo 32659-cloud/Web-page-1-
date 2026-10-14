@@ -1,6 +1,12 @@
 {
-  "app": { "name": "Chat anónimo" },
-  "common": { "cancel": "Cancelar", "close": "Cerrar", "retry": "Reintentar" },
+  "app": {
+    "name": "Chat anónimo"
+  },
+  "common": {
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "retry": "Reintentar"
+  },
   "entry": {
     "tagline": "Sin registro ni inicio de sesión. Elige un apodo y empieza a chatear.",
     "nicknameLabel": "Tu apodo",
@@ -9,8 +15,17 @@
     "langLabel": "Idioma",
     "enter": "Entrar al chat"
   },
-  "conn": { "connected": "Conectado", "reconnecting": "Reconectando…", "offline": "Sin conexión" },
-  "top": { "theme": "Cambiar modo oscuro o claro", "language": "Idioma", "leave": "Salir", "menu": "Menú" },
+  "conn": {
+    "connected": "Conectado",
+    "reconnecting": "Reconectando…",
+    "offline": "Sin conexión"
+  },
+  "top": {
+    "theme": "Cambiar modo oscuro o claro",
+    "language": "Idioma",
+    "leave": "Salir",
+    "menu": "Menú"
+  },
   "online": {
     "title": "En línea",
     "count": "{{count}}",
@@ -55,7 +70,10 @@
     "inputDisabledHint": "La entrada está desactivada. Pulsa «Cerrar» para quitar esta ventana.",
     "back": "Volver a chats privados",
     "loading": "Cargando…",
-    "enlarge": "Haz clic para ampliar la foto"
+    "enlarge": "Haz clic para ampliar la foto",
+    "emojiPanel": "Kaomoji y emojis",
+    "tabKaomoji": "Kaomoji",
+    "tabEmoji": "Emojis"
   },
   "system": {
     "joined": "{{name}} ha entrado",
@@ -106,9 +124,17 @@
     "body": "Los mensajes y fotos de este chat se borrarán.",
     "confirm": "Terminar chat"
   },
-  "tabs": { "public": "Público", "private": "Privados", "online": "En línea" },
-  "title": { "newInvite": "({{count}}) Nueva invitación" },
-  "notice": { "sessionExpired": "Estuviste sin conexión demasiado tiempo y tu apodo se liberó. Entra de nuevo." },
+  "tabs": {
+    "public": "Público",
+    "private": "Privados",
+    "online": "En línea"
+  },
+  "title": {
+    "newInvite": "({{count}}) Nueva invitación"
+  },
+  "notice": {
+    "sessionExpired": "Estuviste sin conexión demasiado tiempo y tu apodo se liberó. Entra de nuevo."
+  },
   "errors": {
     "NICKNAME_INVALID": "El apodo debe tener de 1 a 20 caracteres",
     "NICKNAME_TAKEN": "Ese apodo ya está en uso. Elige otro",

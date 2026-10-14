@@ -1,6 +1,12 @@
 {
-  "app": { "name": "Chat anonyme" },
-  "common": { "cancel": "Annuler", "close": "Fermer", "retry": "Réessayer" },
+  "app": {
+    "name": "Chat anonyme"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "retry": "Réessayer"
+  },
   "entry": {
     "tagline": "Sans inscription ni connexion. Choisissez un pseudo et discutez.",
     "nicknameLabel": "Votre pseudo",
@@ -9,8 +15,17 @@
     "langLabel": "Langue",
     "enter": "Entrer dans le salon"
   },
-  "conn": { "connected": "Connecté", "reconnecting": "Reconnexion…", "offline": "Hors ligne" },
-  "top": { "theme": "Basculer entre mode sombre et clair", "language": "Langue", "leave": "Quitter", "menu": "Menu" },
+  "conn": {
+    "connected": "Connecté",
+    "reconnecting": "Reconnexion…",
+    "offline": "Hors ligne"
+  },
+  "top": {
+    "theme": "Basculer entre mode sombre et clair",
+    "language": "Langue",
+    "leave": "Quitter",
+    "menu": "Menu"
+  },
   "online": {
     "title": "En ligne",
     "count": "{{count}}",
@@ -55,7 +70,10 @@
     "inputDisabledHint": "La saisie est désactivée. Appuyez sur « Fermer » pour retirer cette fenêtre.",
     "back": "Retour aux discussions privées",
     "loading": "Chargement…",
-    "enlarge": "Cliquez pour agrandir la photo"
+    "enlarge": "Cliquez pour agrandir la photo",
+    "emojiPanel": "Kaomoji et émojis",
+    "tabKaomoji": "Kaomoji",
+    "tabEmoji": "Émojis"
   },
   "system": {
     "joined": "{{name}} est arrivé(e)",
@@ -106,9 +124,17 @@
     "body": "Les messages et photos de cette discussion seront supprimés.",
     "confirm": "Terminer"
   },
-  "tabs": { "public": "Public", "private": "Privées", "online": "En ligne" },
-  "title": { "newInvite": "({{count}}) Nouvelle invitation" },
-  "notice": { "sessionExpired": "Vous êtes resté hors ligne trop longtemps et votre pseudo a été libéré. Entrez à nouveau." },
+  "tabs": {
+    "public": "Public",
+    "private": "Privées",
+    "online": "En ligne"
+  },
+  "title": {
+    "newInvite": "({{count}}) Nouvelle invitation"
+  },
+  "notice": {
+    "sessionExpired": "Vous êtes resté hors ligne trop longtemps et votre pseudo a été libéré. Entrez à nouveau."
+  },
   "errors": {
     "NICKNAME_INVALID": "Le pseudo doit contenir de 1 à 20 caractères",
     "NICKNAME_TAKEN": "Ce pseudo est déjà utilisé. Choisissez-en un autre",

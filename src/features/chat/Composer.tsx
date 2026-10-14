@@ -5,7 +5,9 @@ import { LIMITS } from '../../protocol/limits';
 import { toChatError } from '../../protocol/errors';
 import { getService } from '../../state/serviceRef';
 import { useChat } from '../../state/store';
+import { insertAt } from '../../utils/insertText';
 import { charCount } from '../../utils/nickname';
+import { EmojiPanel } from './EmojiPanel';
 import { formatBytes, type ProcessedImage, processImage } from '../images/imageProcess';
 
 interface Props {
@@ -41,6 +43,7 @@ export function Composer({ scope, conversationId, ended, onCloseWindow }: Props)
   const draftKey = `${scope}:${conversationId ?? ''}`;
   const [text, setText] = useState(() => drafts.get(draftKey) ?? '');
   const [pending, setPending] = useState<Pending>(null);
+  const [showEmoji, setShowEmoji] = useState(false);
   const area = useRef<HTMLTextAreaElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const textRef = useRef(text);
@@ -115,6 +118,19 @@ export function Composer({ scope, conversationId, ended, onCloseWindow }: Props)
     }
   }
 
+  function insertEmoji(s: string) {
+    const el = area.current;
+    const r = insertAt(text, s, el?.selectionStart ?? text.length, el?.selectionEnd ?? text.length);
+    setText(r.text);
+    // 重新渲染後把游標放在插入的字後面
+    requestAnimationFrame(() => {
+      const a = area.current;
+      if (!a) return;
+      if (!touch) a.focus();
+      a.setSelectionRange(r.cursor, r.cursor);
+    });
+  }
+
   function cancelPhoto() {
     const img = imageOf(pending);
     if (img) URL.revokeObjectURL(img.thumbUrl);
@@ -174,6 +190,7 @@ export function Composer({ scope, conversationId, ended, onCloseWindow }: Props)
         </div>
       )}
 
+      {showEmoji && <EmojiPanel onPick={insertEmoji} />}
       <div className="composer-row">
         <input
           ref={fileInput}
@@ -193,6 +210,15 @@ export function Composer({ scope, conversationId, ended, onCloseWindow }: Props)
           onClick={() => fileInput.current?.click()}
         >
           <Icon name="image" size={22} />
+        </button>
+        <button
+          type="button"
+          className="photo-btn emoji-btn"
+          aria-label={t('chat.emojiPanel')}
+          aria-expanded={showEmoji}
+          onClick={() => setShowEmoji((v) => !v)}
+        >
+          <Icon name="smile" size={22} />
         </button>
         <div className={`input-box ${over ? 'over' : ''}`}>
           <textarea

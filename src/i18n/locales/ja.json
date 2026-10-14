@@ -1,6 +1,12 @@
 {
-  "app": { "name": "匿名チャット" },
-  "common": { "cancel": "キャンセル", "close": "閉じる", "retry": "再試行" },
+  "app": {
+    "name": "匿名チャット"
+  },
+  "common": {
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "retry": "再試行"
+  },
   "entry": {
     "tagline": "登録もログインも不要。ニックネームを決めてチャットを始めよう。",
     "nicknameLabel": "ニックネーム",
@@ -9,8 +15,17 @@
     "langLabel": "表示言語",
     "enter": "チャットルームに入る"
   },
-  "conn": { "connected": "接続中", "reconnecting": "再接続中…", "offline": "オフライン" },
-  "top": { "theme": "ダークモード/ライトモードを切り替え", "language": "表示言語", "leave": "退出", "menu": "メニュー" },
+  "conn": {
+    "connected": "接続中",
+    "reconnecting": "再接続中…",
+    "offline": "オフライン"
+  },
+  "top": {
+    "theme": "ダークモード/ライトモードを切り替え",
+    "language": "表示言語",
+    "leave": "退出",
+    "menu": "メニュー"
+  },
   "online": {
     "title": "オンライン",
     "count": "{{count}}人",
@@ -55,7 +70,10 @@
     "inputDisabledHint": "入力欄は無効です。「閉じる」でこのウィンドウを消せます。",
     "back": "個別チャット一覧に戻る",
     "loading": "読み込み中…",
-    "enlarge": "クリックで写真を拡大"
+    "enlarge": "クリックで写真を拡大",
+    "emojiPanel": "顔文字と絵文字",
+    "tabKaomoji": "顔文字",
+    "tabEmoji": "絵文字"
   },
   "system": {
     "joined": "{{name}}さんが入室しました",
@@ -106,9 +124,17 @@
     "body": "このチャットのメッセージと写真は削除されます。",
     "confirm": "チャットを終了"
   },
-  "tabs": { "public": "公開", "private": "個別", "online": "オンライン" },
-  "title": { "newInvite": "({{count}}) 新しい招待" },
-  "notice": { "sessionExpired": "オフライン時間が長すぎたため、ニックネームが解放されました。もう一度入室してください。" },
+  "tabs": {
+    "public": "公開",
+    "private": "個別",
+    "online": "オンライン"
+  },
+  "title": {
+    "newInvite": "({{count}}) 新しい招待"
+  },
+  "notice": {
+    "sessionExpired": "オフライン時間が長すぎたため、ニックネームが解放されました。もう一度入室してください。"
+  },
   "errors": {
     "NICKNAME_INVALID": "ニックネームは1〜20文字にしてください",
     "NICKNAME_TAKEN": "このニックネームは使用中です。別のものにしてください",

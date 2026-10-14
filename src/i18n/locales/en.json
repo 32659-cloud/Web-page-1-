@@ -1,6 +1,12 @@
 {
-  "app": { "name": "Anonymous Chat" },
-  "common": { "cancel": "Cancel", "close": "Close", "retry": "Retry" },
+  "app": {
+    "name": "Anonymous Chat"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "retry": "Retry"
+  },
   "entry": {
     "tagline": "No sign-up, no login. Pick a nickname and start chatting.",
     "nicknameLabel": "Your nickname",
@@ -9,8 +15,17 @@
     "langLabel": "Language",
     "enter": "Enter chat room"
   },
-  "conn": { "connected": "Connected", "reconnecting": "Reconnecting…", "offline": "Offline" },
-  "top": { "theme": "Switch dark or light mode", "language": "Language", "leave": "Leave", "menu": "Menu" },
+  "conn": {
+    "connected": "Connected",
+    "reconnecting": "Reconnecting…",
+    "offline": "Offline"
+  },
+  "top": {
+    "theme": "Switch dark or light mode",
+    "language": "Language",
+    "leave": "Leave",
+    "menu": "Menu"
+  },
   "online": {
     "title": "Online",
     "count": "{{count}}",
@@ -55,7 +70,10 @@
     "inputDisabledHint": "The input is disabled. Press “Close” to remove this window.",
     "back": "Back to private chats",
     "loading": "Loading…",
-    "enlarge": "Click to enlarge photo"
+    "enlarge": "Click to enlarge photo",
+    "emojiPanel": "Kaomoji and emoji",
+    "tabKaomoji": "Kaomoji",
+    "tabEmoji": "Emoji"
   },
   "system": {
     "joined": "{{name}} joined",
@@ -106,9 +124,17 @@
     "body": "Messages and photos in this chat will be deleted.",
     "confirm": "End chat"
   },
-  "tabs": { "public": "Public", "private": "Private", "online": "Online" },
-  "title": { "newInvite": "({{count}}) New invitation" },
-  "notice": { "sessionExpired": "You were offline too long and your nickname was released. Please enter again." },
+  "tabs": {
+    "public": "Public",
+    "private": "Private",
+    "online": "Online"
+  },
+  "title": {
+    "newInvite": "({{count}}) New invitation"
+  },
+  "notice": {
+    "sessionExpired": "You were offline too long and your nickname was released. Please enter again."
+  },
   "errors": {
     "NICKNAME_INVALID": "Nickname must be 1 to 20 characters",
     "NICKNAME_TAKEN": "That nickname is already in use. Please pick another",

@@ -78,7 +78,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .empty-state strong { color: var(--text); }
 
 /* ── 整體版面 ── */
-.app { height: 100dvh; display: flex; flex-direction: column; background: var(--bg); }
+.app { height: var(--vvh, 100dvh); display: flex; flex-direction: column; background: var(--bg); }
 .topbar {
   height: 60px; flex: none; display: flex; align-items: center; justify-content: space-between;
   padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line);
@@ -210,6 +210,17 @@ button.conv-row:hover { background: var(--surface2); }
   background: var(--blue); display: flex; align-items: center; justify-content: center;
 }
 .photo-btn:disabled { opacity: 0.5; }
+.emoji-btn { background: var(--pink); }
+.emoji-btn[aria-expanded='true'] { background: var(--lav); }
+.emoji-panel { display: flex; flex-direction: column; gap: 8px; padding: 8px; border-radius: 16px; background: var(--surface2); }
+.emoji-tabs { display: flex; gap: 6px; }
+.emoji-tab { flex: 1; min-height: 36px; border-radius: 10px; border: 1px solid transparent; background: transparent; font-size: 14px; font-weight: 500; }
+.emoji-tab.on { background: var(--lav); border-color: var(--lavS); font-weight: 700; }
+.emoji-grid { display: grid; gap: 4px; max-height: 168px; overflow-y: auto; overscroll-behavior: contain; }
+.emoji-grid.kaomoji { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+.emoji-grid.emoji { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); }
+.emoji-item { min-height: 44px; padding: 0 6px; border-radius: 10px; border: 0; background: var(--surface); font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.emoji-grid.emoji .emoji-item { font-size: 22px; }
 .input-box {
   flex: 1; min-width: 0; min-height: 46px; display: flex; align-items: flex-end; gap: 10px;
   padding: 10px 16px; border-radius: 16px; background: var(--surface2); border: 1.5px solid transparent;
@@ -351,6 +362,9 @@ button.conv-row:hover { background: var(--surface2); }
 .app.mobile .avatar-spacer { width: 34px; }
 .app.mobile .composer { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
 .app.mobile .composer-row { gap: 8px; }
+/* iOS 的輸入框字級小於 16px 會在點進去時自動放大頁面 */
+.app.mobile .input-box textarea { font-size: 16px; }
+.app.mobile .emoji-grid { max-height: 132px; }
 .app.mobile .send-btn { width: 46px; padding: 0; justify-content: center; }
 .app.mobile .send-label { display: none; }
 .app.mobile .recall-btn { padding: 6px 10px; min-height: 32px; }

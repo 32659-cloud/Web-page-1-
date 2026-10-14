@@ -37,3 +37,15 @@ describe('規則常數', () => {
     expect(getLimits('?fast=1').inviteExpiryMs).toBeLessThan(LIMITS.inviteExpiryMs);
   });
 });
+
+describe('插入顏文字', () => {
+  it('插在游標位置,游標移到插入文字後', async () => {
+    const { insertAt } = await import('../src/utils/insertText');
+    expect(insertAt('abcd', 'X', 2, 2)).toEqual({ text: 'abXcd', cursor: 3 });
+  });
+  it('有選取時取代選取範圍,超出範圍的游標會被修正', async () => {
+    const { insertAt } = await import('../src/utils/insertText');
+    expect(insertAt('abcd', '(^_^)', 1, 3).text).toBe('a(^_^)d');
+    expect(insertAt('ab', 'X', 99, 99)).toEqual({ text: 'abX', cursor: 3 });
+  });
+});

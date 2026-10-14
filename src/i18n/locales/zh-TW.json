@@ -1,6 +1,12 @@
 {
-  "app": { "name": "匿名聊天室" },
-  "common": { "cancel": "取消", "close": "關閉", "retry": "重試" },
+  "app": {
+    "name": "匿名聊天室"
+  },
+  "common": {
+    "cancel": "取消",
+    "close": "關閉",
+    "retry": "重試"
+  },
   "entry": {
     "tagline": "不用註冊、不用登入。取一個代號就能進來聊天。",
     "nicknameLabel": "你的代號",
@@ -9,8 +15,17 @@
     "langLabel": "介面語言",
     "enter": "進入聊天室"
   },
-  "conn": { "connected": "已連線", "reconnecting": "重新連線中…", "offline": "已離線" },
-  "top": { "theme": "切換深色或淺色模式", "language": "介面語言", "leave": "離開", "menu": "選單" },
+  "conn": {
+    "connected": "已連線",
+    "reconnecting": "重新連線中…",
+    "offline": "已離線"
+  },
+  "top": {
+    "theme": "切換深色或淺色模式",
+    "language": "介面語言",
+    "leave": "離開",
+    "menu": "選單"
+  },
   "online": {
     "title": "線上",
     "count": "{{count}} 人",
@@ -55,7 +70,10 @@
     "inputDisabledHint": "輸入框已停用。按「關閉」移除這個視窗。",
     "back": "返回私聊清單",
     "loading": "載入中…",
-    "enlarge": "點擊放大照片"
+    "enlarge": "點擊放大照片",
+    "emojiPanel": "顏文字與表情符號",
+    "tabKaomoji": "顏文字",
+    "tabEmoji": "表情符號"
   },
   "system": {
     "joined": "{{name}} 進來了",
@@ -106,9 +124,17 @@
     "body": "結束後,這個私聊的訊息和照片都會刪除。",
     "confirm": "結束私聊"
   },
-  "tabs": { "public": "公開", "private": "私聊", "online": "線上" },
-  "title": { "newInvite": "({{count}}) 有新邀請" },
-  "notice": { "sessionExpired": "你離線太久,代號已釋放。請重新進入。" },
+  "tabs": {
+    "public": "公開",
+    "private": "私聊",
+    "online": "線上"
+  },
+  "title": {
+    "newInvite": "({{count}}) 有新邀請"
+  },
+  "notice": {
+    "sessionExpired": "你離線太久,代號已釋放。請重新進入。"
+  },
   "errors": {
     "NICKNAME_INVALID": "代號要 1 到 20 個字",
     "NICKNAME_TAKEN": "這個代號已被使用,請換一個",
