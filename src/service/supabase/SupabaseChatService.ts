@@ -31,7 +31,6 @@ import {
 } from './mapping';
 import { PresenceTracker } from './PresenceTracker';
 
-const HEARTBEAT_MS = 20_000;
 const SNAPSHOT_TIMEOUT_MS = 10_000;
 const PRESENCE_WAIT_MS = 5_000;
 const SIGNED_URL_SEC = 3600;
@@ -249,7 +248,7 @@ export class SupabaseChatService implements ChatService {
       throw e instanceof ChatError ? e : new ChatError('UNKNOWN');
     }
 
-    this.heartbeatTimer = window.setInterval(() => void this.beat(), HEARTBEAT_MS);
+    this.heartbeatTimer = window.setInterval(() => void this.beat(), LIMITS.heartbeatMs);
     this.updateStatus();
   }
 

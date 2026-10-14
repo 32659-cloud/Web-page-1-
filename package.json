@@ -8,7 +8,9 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "node --env-file=.env.local tests/e2e/chat.e2e.mjs",
+    "test:security": "node --env-file=.env.local tests/e2e/security.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",
@@ -20,6 +22,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.9",
     "@types/node": "^26.6.5",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

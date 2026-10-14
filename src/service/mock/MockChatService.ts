@@ -121,7 +121,7 @@ export class MockChatService implements ChatService, MockDevTools {
     window.addEventListener('offline', this.onOffline);
     window.addEventListener('online', this.onOnline);
     this.timers.push(window.setInterval(() => this.tick(), 1000));
-    this.timers.push(window.setInterval(() => this.beat(), this.limits.heartbeatMs));
+    this.timers.push(window.setInterval(() => this.beat(), this.limits.mockHeartbeatMs));
     this.setStatus(navigator.onLine ? 'connected' : 'offline');
     this.tick();
   }

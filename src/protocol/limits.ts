@@ -29,7 +29,10 @@ export interface Limits {
   privateOfflineMs: number;
   /** 沒有私聊的人離線超過這個時間,釋放代號 */
   reserveMs: number;
+  /** 真實後端:每隔多久回報「我還在」 */
   heartbeatMs: number;
+  /** 模擬層:模擬層用「最近 15 秒內有心跳」判斷在線,所以回報得比較頻繁 */
+  mockHeartbeatMs: number;
 }
 
 export const LIMITS: Limits = {
@@ -51,7 +54,8 @@ export const LIMITS: Limits = {
   offlineAnnounceMs: 15 * SEC,
   privateOfflineMs: 30 * MIN,
   reserveMs: 2 * MIN,
-  heartbeatMs: 3 * SEC,
+  heartbeatMs: 20 * SEC,
+  mockHeartbeatMs: 3 * SEC,
 };
 
 /** 測試用的「快速模式」:網址加 ?fast=1,把長時間的規則縮短,方便手動測試 */

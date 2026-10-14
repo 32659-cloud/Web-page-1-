@@ -8,7 +8,7 @@
 - 前端:TypeScript + React + Vite + Zustand + i18next,資料夾照架構文件第 11 節
 - 模擬通訊層 `MockChatService`(規則在 `src/service/mock/core.ts`,機器人在 `bots.ts`)
 - 六種語言的介面文字、淺色與深色模式、電腦版三欄與手機版分頁
-- 自動測試 28 個(`npm test`),`npm run build` 通過
+- 自動測試(`npm test`),`npm run build` 通過
 - 顏文字/表情符號面板(`EmojiPanel`);手機版輸入框 16px 修正 iOS 自動放大,`visualViewport` 處理鍵盤
 - 階段二:`supabase/migrations/` 三份 SQL(已在專案 `ibadmcwdkvyvxjmimsjo` 執行),`SupabaseChatService`(`src/service/supabase/`)。真實專案上驗證:3 個瀏覽器端對端 30 項、安全 36 項全部通過;PGlite 規則測試 98 項;`npm test` 47 個
 - 部署設定:`vite.config.ts` 的 `base` 自動帶入 repo 名稱,`.github/workflows/deploy.yml`
@@ -38,5 +38,7 @@
 3. 第一版不做:清掃孤兒照片檔的 Edge Function(見 architecture.md 4.2)。
 4. 測試殘留:公開聊天室有測試訊息,可在 SQL Editor 執行 `delete from public.public_messages;` 清掉。
 
+5. 文件與程式的一致性檢查(2026-10-14)已做完並修正,結果見 git 紀錄。
+
 ### 原本的規劃(保留參考)
-照 `architecture.md` 4.2:新增 `SupabaseChatService`、`supabase/migrations/`、Edge Function、金鑰設定。階段一的測試(`tests/core.test.ts`)可原封不動拿來驗證真實後端。
+照 `architecture.md` 4.2:新增 `SupabaseChatService`、`supabase/migrations/`、Edge Function、金鑰設定。驗證真實後端的測試見上面「已完成」:`tests/sql`(資料庫規則,`npm test` 會跑)、`npm run test:e2e`、`npm run test:security`(連真實專案,手動執行)。
