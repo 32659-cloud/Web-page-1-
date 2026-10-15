@@ -341,8 +341,8 @@ button.conv-row:hover { background: var(--surface2); }
   position: absolute; top: 16px; right: 20px; width: 44px; height: 44px; border-radius: 50%;
   border: 0; background: rgba(255, 255, 255, 0.18); color: #fff; display: flex; align-items: center; justify-content: center;
 }
-.lightbox-stage { position: relative; max-width: 100%; max-height: calc(100dvh - 120px); overflow: auto; touch-action: pan-x pan-y pinch-zoom; border-radius: 20px; }
-.lightbox-stage img { display: block; max-width: 100%; max-height: calc(100dvh - 120px); margin: 0 auto; border-radius: 20px; }
+.lightbox-stage { position: relative; max-width: 100%; max-height: calc(100dvh - 120px); touch-action: none; border-radius: 20px; }
+.lightbox-stage img { display: block; transform-origin: center; will-change: transform; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; max-width: 100%; max-height: calc(100dvh - 120px); margin: 0 auto; border-radius: 20px; }
 .lightbox-stage img.loading { filter: blur(6px); }
 .lightbox-loading { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); padding: 4px 12px; border-radius: 999px; background: rgba(0, 0, 0, 0.55); color: #fff; font-size: 13px; }
 .lightbox-caption { color: rgba(255, 255, 255, 0.85); font-size: 14px; text-align: center; }
