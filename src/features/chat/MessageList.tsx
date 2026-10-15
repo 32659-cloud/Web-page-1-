@@ -151,7 +151,7 @@ export function MessageList({ items, meId, scope }: Props) {
               {own && !m.recalled && (
                 <button
                   type="button"
-                  className={`recall-btn ${active ? 'show' : ''}`}
+                  className={`recall-btn ${active ? 'show' : ''} ${m.image ? 'on-photo' : ''}`}
                   onClick={() => setRecallId(m.id)}
                 >
                   <Icon name="undo" size={12} strokeWidth={2.4} />

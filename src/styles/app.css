@@ -195,6 +195,8 @@ button.conv-row:hover { background: var(--surface2); }
   border: 1px solid var(--line); background: var(--surface); font-size: 12px; opacity: 0;
 }
 .msg-row:hover .recall-btn, .recall-btn:focus-visible, .recall-btn.show { opacity: 1; }
+/* 觸控手機:照片訊息的「收回」鈕一直顯示(點照片是放大,不能再靠點一下來叫出收回;iPhone 的第一下點擊會被 hover 吃掉,其他手機不會,行為不一致) */
+@media (hover: none) { .recall-btn.on-photo { opacity: 1; } }
 .new-msg-btn {
   position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
   display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 16px; border-radius: 999px;
